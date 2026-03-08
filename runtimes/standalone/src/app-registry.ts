@@ -235,7 +235,7 @@ export const APP_REGISTRY: AppEntry[] = [
     slug: "showcase-03-game-of-life",
     name: "03 Game of Life",
     description:
-      "An interactive implementation of Conway's Game of Life with drawing tools and dynamic 20Hz timing.",
+      "An interactive implementation of Conway's Game of Life with drawing tool and dynamic simulation speed.",
     controls: "Mouse: Draw cells",
     category: "showcase",
     factory: () => new GameOfLife(),
