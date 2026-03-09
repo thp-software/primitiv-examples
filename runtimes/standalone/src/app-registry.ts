@@ -13,6 +13,7 @@ export interface AppEntry {
   controls?: string;
   features?: string[];
   category?: "showcase" | "showcase-3d";
+  version?: string;
   factory: () => IApplication;
 }
 
@@ -33,6 +34,7 @@ import { MultiDisplay } from "../../../applications/13-multi-display";
 import { PostProcessShowcase } from "../../../applications/14-post-process";
 import { MultiUserShowcase } from "../../../applications/15-multi-user";
 import { Cp437Table } from "../../../applications/16-cp437";
+import { CompressionShowcase } from "../../../applications/17-frame-compression";
 
 
 import { VoxelSpaceApp } from "../../../applications/showcase-3d-01-voxel-space";
@@ -178,6 +180,14 @@ export const APP_REGISTRY: AppEntry[] = [
     description:
       "Full CP437 character table - tests Unicode -> CP437 conversion for all 256 glyphs.",
     factory: () => new Cp437Table(),
+  },
+  {
+    slug: "17-frame-compression",
+    name: "17 Frame Compression",
+    description: "Demonstrates Frame Compression for subFrameMulti & FrameMulti.",
+    controls: "SPACE: Toggle compression",
+    version: "0.21 Nightly",
+    factory: () => new CompressionShowcase(),
   },
 
 
