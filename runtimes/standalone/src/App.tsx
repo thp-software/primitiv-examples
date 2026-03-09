@@ -297,32 +297,59 @@ function AppCard({ app }: { app: AppEntry }) {
       <div
         style={{
           display: "flex",
-          alignItems: "baseline",
+          justifyContent: "space-between",
+          alignItems: "flex-start",
           gap: "0.5rem",
           marginBottom: "0.4rem",
         }}
       >
-        {num ? (
-          <span
-            style={{
-              fontSize: "0.75rem",
-              fontWeight: 600,
-              color: "#6366f1",
-              fontFamily: "monospace",
-            }}
-          >
-            {num}
-          </span>
-        ) : null}
-        <span
+        <div
           style={{
-            fontSize: "1.05rem",
-            fontWeight: 600,
-            color: "#e2e8f0",
+            display: "flex",
+            alignItems: "baseline",
+            gap: "0.5rem",
           }}
         >
-          {app.name.replace(/^\d+\s+/, "")}
-        </span>
+          {num ? (
+            <span
+              style={{
+                fontSize: "0.75rem",
+                fontWeight: 600,
+                color: "#6366f1",
+                fontFamily: "monospace",
+              }}
+            >
+              {num}
+            </span>
+          ) : null}
+          <span
+            style={{
+              fontSize: "1.05rem",
+              fontWeight: 600,
+              color: "#e2e8f0",
+            }}
+          >
+            {app.name.replace(/^\d+\s+/, "")}
+          </span>
+        </div>
+        {app.version && (
+          <span
+            style={{
+              fontSize: "0.65rem",
+              fontWeight: 700,
+              color: "#fbbf24",
+              background: "rgba(245, 158, 11, 0.1)",
+              border: "1px solid rgba(245, 158, 11, 0.2)",
+              padding: "2px 6px",
+              borderRadius: "4px",
+              textTransform: "uppercase",
+              letterSpacing: "0.05em",
+              whiteSpace: "nowrap",
+            }}
+          >
+            {app.version}
+          </span>
+        )}
       </div>
       <p
         style={{
@@ -376,9 +403,8 @@ const ThemeButtons = memo(function ThemeButtons({
             style={{
               padding: "0.6rem",
               backgroundColor: activeTheme === i ? THEME_COLORS[i] : "#1e293b",
-              border: `2px solid ${
-                activeTheme === i ? THEME_COLORS[i] : "#334155"
-              }`,
+              border: `2px solid ${activeTheme === i ? THEME_COLORS[i] : "#334155"
+                }`,
               borderRadius: "8px",
               color: "white",
               fontWeight: 600,

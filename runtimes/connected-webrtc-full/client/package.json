@@ -12,8 +12,8 @@
   "dependencies": {
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
-    "@primitiv/engine": "0.20.0-nightly.20260305221139.62582ab",
-    "@primitiv/client": "0.20.0-nightly.20260305221139.62582ab"
+    "@primitiv/engine": "0.21.0-nightly.20260308225608.e7edbdc",
+    "@primitiv/client": "0.21.0-nightly.20260308225608.e7edbdc"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
