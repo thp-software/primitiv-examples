@@ -14,8 +14,8 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@primitiv/engine": "0.21.0-nightly.20260308225608.e7edbdc",
-    "@primitiv/server": "0.21.0-nightly.20260308225608.e7edbdc",
+    "@primitiv/engine": "0.21.0",
+    "@primitiv/server": "0.21.0",
     "cors": "^2.8.5"
   },
   "devDependencies": {

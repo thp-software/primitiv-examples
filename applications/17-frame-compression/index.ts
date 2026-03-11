@@ -1,6 +1,4 @@
 /**
- * @warning This feature is currently in nightly and will be officially available in Primitiv 0.21.
- * 
  * Name: 17-frame-compression
  * Category: showcase
  * Description: A technical demonstration of Primitiv's optional Frame Compression

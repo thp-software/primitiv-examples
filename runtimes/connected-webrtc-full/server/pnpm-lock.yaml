@@ -9,11 +9,11 @@ importers:
   .:
     dependencies:
       '@primitiv/engine':
-        specifier: 0.21.0-nightly.20260308225608.e7edbdc
-        version: 0.21.0-nightly.20260308225608.e7edbdc
+        specifier: 0.21.0
+        version: 0.21.0
       '@primitiv/server':
-        specifier: 0.21.0-nightly.20260308225608.e7edbdc
-        version: 0.21.0-nightly.20260308225608.e7edbdc
+        specifier: 0.21.0
+        version: 0.21.0
       cors:
         specifier: ^2.8.5
         version: 2.8.6
@@ -189,36 +189,36 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@primitiv/core@0.21.0-nightly.20260308225608.e7edbdc':
-    resolution: {integrity: sha512-dE6XQ/VhziIpGxFtwkVhrRJ9iSmYQW9/WUGoyrvqxtKQuCTpSfoHwO/0H6QRNjxdSLVKVQjzGIQ/UGnT+cupIg==}
+  '@primitiv/core@0.21.0':
+    resolution: {integrity: sha512-8MbFVR3CwMTRrERPWpBlxOHIczWHKSjqPDL0XDxc77N5f6xF7ar3MxcG+PtZAoG1FmgF8M8KZHbDaGyOTbTjiQ==}
     engines: {node: '>=18.0.0'}
 
-  '@primitiv/engine@0.21.0-nightly.20260308225608.e7edbdc':
-    resolution: {integrity: sha512-C+jZ8rgcTu3p4kU92hSCwgGgqpE3dNA2kZhWXhQgiBa+pslhOK8HCxBRl+vr2yembRJU8zBIh4iYHLdevjtATg==}
+  '@primitiv/engine@0.21.0':
+    resolution: {integrity: sha512-ScPxTPfq6cDiTFk91NkH0bpcMQ0NXkqQBFdIkHENGn2xuF1vbKbp3UiT5iL0v8NeGkgbWOoI+bNniAyR8hC88Q==}
     engines: {node: '>=18.0.0'}
 
-  '@primitiv/logger@0.21.0-nightly.20260308225608.e7edbdc':
-    resolution: {integrity: sha512-XBNOFnaPirippukqVe+cQn078CoWriPfOxvjvlYBS75dDhTfzwDaC9UTQSEWNfGepv4x4Uss2nOqTuV5ZVRPfA==}
+  '@primitiv/logger@0.21.0':
+    resolution: {integrity: sha512-IQxsAWUPYedBAPSBkpB4583EomLCgwKQJx3nKZEGD+mrjpvaKa2mnKeWUcn1q2er9slKnI+gE8JJ4OsvNy+SQQ==}
     engines: {node: '>=18.0.0'}
 
-  '@primitiv/network-common@0.21.0-nightly.20260308225608.e7edbdc':
-    resolution: {integrity: sha512-5i86rLZpLNCjKpDBkkJKluN9UmMkKnjiRHtQV1n++rrGJxGk0jv92IrPLmLCIIH2z5WUAQr0CNRmxLEGqNSPYA==}
+  '@primitiv/network-common@0.21.0':
+    resolution: {integrity: sha512-dPrYGzav4j6dC6BEo2mDL7lO8/Sjx8YQLgzrvZW2HYr5+UlFZZ8kY1ubSHHfl/GCyct0ndoz0JcDJQBZzJGkLg==}
     engines: {node: '>=18.0.0'}
 
-  '@primitiv/network-server@0.21.0-nightly.20260308225608.e7edbdc':
-    resolution: {integrity: sha512-zudIbCJCNmV4r3weafbNwieV/csSmC/oW5s0kbmIhb2bDVVaSFEx60aq3PCJMShK+teKwowwfWTt8cG78atMgg==}
+  '@primitiv/network-server@0.21.0':
+    resolution: {integrity: sha512-FyeWresk+H7YaiwDHSp/cUskF67zHRKx1x5hG+oswxaBb4KgFjPH+SrOXYxLZrXLH6uQSmQP+1ur7DdX2NnOKQ==}
     engines: {node: '>=18.0.0'}
 
-  '@primitiv/runtime-server@0.21.0-nightly.20260308225608.e7edbdc':
-    resolution: {integrity: sha512-CuQ2U3MeuSlqdcDiqaPvcJwZrJA32EHW3ON7+h+Qjgndmq8EEJKaDSGW1Jm8Qc/6+fx6FRWjhYT1FxSU5KI0xQ==}
+  '@primitiv/runtime-server@0.21.0':
+    resolution: {integrity: sha512-0gr1CgKVs2nKu7z9gYRZnXHSzWE3a6BmGYdftYG8adpHg8GABhMymLT0/gWBxchwK4TPllYVTPSVX0Y0lJimcg==}
     engines: {node: '>=18.0.0'}
 
-  '@primitiv/server@0.21.0-nightly.20260308225608.e7edbdc':
-    resolution: {integrity: sha512-FbDKkrpVgGMl6kBGTJV9W3gYRGD21rEeKF08IfDeOTFBhd+VBbt8q0U3nS+2a/xzk3/2pzX9Q99vgVEKxxyikg==}
+  '@primitiv/server@0.21.0':
+    resolution: {integrity: sha512-FRHJbK/+pVVAhWILWtoSQCKdJTnD7WWdbGwK+KZoai30ZL0nRL7W8JvUmKo88WqBRcpn1/yOwzncUwu4nDc3hw==}
     engines: {node: '>=18.0.0'}
 
-  '@primitiv/types@0.21.0-nightly.20260308225608.e7edbdc':
-    resolution: {integrity: sha512-qTJxfAe208ptkPR+T62mq6AhKXgOxvbvHrfJJh9LENFuoup7EswTD+eMlpp12IppeaVyJJU2MBND0qTEN5JHmA==}
+  '@primitiv/types@0.21.0':
+    resolution: {integrity: sha512-SfQPgZuj27uNlXDIRrVgU2pCj0ALo9+HhcsaN5Ra6Toi/sUXtTvel3HnQ6uw7rFJ4SLI74aq5qWnd+iZ/Gj4kQ==}
     engines: {node: '>=18.0.0'}
 
   '@types/cors@2.8.19':
@@ -481,44 +481,44 @@ snapshots:
   '@esbuild/win32-x64@0.27.3':
     optional: true
 
-  '@primitiv/core@0.21.0-nightly.20260308225608.e7edbdc':
+  '@primitiv/core@0.21.0':
     dependencies:
-      '@primitiv/logger': 0.21.0-nightly.20260308225608.e7edbdc
-      '@primitiv/types': 0.21.0-nightly.20260308225608.e7edbdc
+      '@primitiv/logger': 0.21.0
+      '@primitiv/types': 0.21.0
 
-  '@primitiv/engine@0.21.0-nightly.20260308225608.e7edbdc':
+  '@primitiv/engine@0.21.0':
     dependencies:
-      '@primitiv/core': 0.21.0-nightly.20260308225608.e7edbdc
-      '@primitiv/types': 0.21.0-nightly.20260308225608.e7edbdc
+      '@primitiv/core': 0.21.0
+      '@primitiv/types': 0.21.0
 
-  '@primitiv/logger@0.21.0-nightly.20260308225608.e7edbdc': {}
+  '@primitiv/logger@0.21.0': {}
 
-  '@primitiv/network-common@0.21.0-nightly.20260308225608.e7edbdc':
+  '@primitiv/network-common@0.21.0':
     dependencies:
-      '@primitiv/types': 0.21.0-nightly.20260308225608.e7edbdc
+      '@primitiv/types': 0.21.0
 
-  '@primitiv/network-server@0.21.0-nightly.20260308225608.e7edbdc':
+  '@primitiv/network-server@0.21.0':
     dependencies:
-      '@primitiv/network-common': 0.21.0-nightly.20260308225608.e7edbdc
-      '@primitiv/types': 0.21.0-nightly.20260308225608.e7edbdc
+      '@primitiv/network-common': 0.21.0
+      '@primitiv/types': 0.21.0
       node-datachannel: 0.12.0
       uWebSockets.js: https://codeload.github.com/uNetworking/uWebSockets.js/tar.gz/fcfc622a4286909593b7f390056d89e0ca3b56b9
 
-  '@primitiv/runtime-server@0.21.0-nightly.20260308225608.e7edbdc':
+  '@primitiv/runtime-server@0.21.0':
     dependencies:
-      '@primitiv/core': 0.21.0-nightly.20260308225608.e7edbdc
-      '@primitiv/logger': 0.21.0-nightly.20260308225608.e7edbdc
-      '@primitiv/network-common': 0.21.0-nightly.20260308225608.e7edbdc
-      '@primitiv/network-server': 0.21.0-nightly.20260308225608.e7edbdc
-      '@primitiv/types': 0.21.0-nightly.20260308225608.e7edbdc
+      '@primitiv/core': 0.21.0
+      '@primitiv/logger': 0.21.0
+      '@primitiv/network-common': 0.21.0
+      '@primitiv/network-server': 0.21.0
+      '@primitiv/types': 0.21.0
 
-  '@primitiv/server@0.21.0-nightly.20260308225608.e7edbdc':
+  '@primitiv/server@0.21.0':
     dependencies:
-      '@primitiv/network-common': 0.21.0-nightly.20260308225608.e7edbdc
-      '@primitiv/network-server': 0.21.0-nightly.20260308225608.e7edbdc
-      '@primitiv/runtime-server': 0.21.0-nightly.20260308225608.e7edbdc
+      '@primitiv/network-common': 0.21.0
+      '@primitiv/network-server': 0.21.0
+      '@primitiv/runtime-server': 0.21.0
 
-  '@primitiv/types@0.21.0-nightly.20260308225608.e7edbdc': {}
+  '@primitiv/types@0.21.0': {}
 
   '@types/cors@2.8.19':
     dependencies:

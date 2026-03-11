@@ -54,6 +54,7 @@ import {
   OrderBuilder,
   Vector2,
   KeyboardInput,
+  LogicalKey,
   MouseInput,
   InputDeviceType,
   type IApplication,
@@ -141,6 +142,14 @@ export class InputShowcase implements IApplication<
       OrderBuilder.text(18, 19, "(Left Shift)", 4, 0),
       OrderBuilder.text(18, 20, "Accelerate:", 4, 0),
       OrderBuilder.rect(10, 22, 21, 1, "-", 4, 0, true),
+
+      OrderBuilder.text(2, 25, "LOGICAL SHORCUTS:", 3, 0),
+      OrderBuilder.text(18, 25, "(M) Map:", 4, 0),
+      OrderBuilder.text(18, 26, "(I) Inventory:", 4, 0),
+
+      OrderBuilder.text(2, 27, "LAYOUT AWARENESS:", 3, 0),
+      OrderBuilder.text(2, 29, "Physical (KeyboardInput) = Positional (WASD/Arrows)", 4, 0),
+      OrderBuilder.text(2, 30, "Logical (LogicalKey)     = Semantic (M for Map)", 4, 0),
     );
     staticLayer.setOrders(staticOrders);
 
@@ -152,9 +161,17 @@ export class InputShowcase implements IApplication<
      */
     const registry = user.getInputBindingRegistry();
 
-    // 1. Basic Action (Keyboard Space bar)
+    // 1. Basic Action (Layout-aware Space)
     registry.defineButton(0, "ACTION_A", [
-      { sourceId: 1, type: InputDeviceType.Keyboard, key: KeyboardInput.Space },
+      { sourceId: 1, type: InputDeviceType.Keyboard, logicalKey: LogicalKey.Space },
+    ]);
+
+    // 1b. Semantic shortcuts (Layout-aware letters)
+    registry.defineButton(3, "OPEN_MAP", [
+      { sourceId: 8, type: InputDeviceType.Keyboard, logicalKey: LogicalKey.M },
+    ]);
+    registry.defineButton(4, "OPEN_INVENTORY", [
+      { sourceId: 9, type: InputDeviceType.Keyboard, logicalKey: LogicalKey.I },
     ]);
 
     // 2. Mouse Buttons
@@ -243,6 +260,17 @@ export class InputShowcase implements IApplication<
         0,
       ),
       OrderBuilder.text(29, 8, data.lastAction.padEnd(15, " "), 2, 0),
+    );
+
+    /**
+     * SEMANTIC LOGICAL BINDINGS
+     */
+    const isMapPressed = user.getButton("OPEN_MAP");
+    const isInvPressed = user.getButton("OPEN_INVENTORY");
+
+    orders.push(
+      OrderBuilder.text(29, 25, isMapPressed ? "YES" : "NO ", isMapPressed ? 1 : 4, 0),
+      OrderBuilder.text(33, 26, isInvPressed ? "YES" : "NO ", isInvPressed ? 1 : 4, 0),
     );
 
     /**
