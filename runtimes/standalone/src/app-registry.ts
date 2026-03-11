@@ -186,7 +186,6 @@ export const APP_REGISTRY: AppEntry[] = [
     name: "17 Frame Compression",
     description: "Demonstrates Frame Compression for subFrameMulti & FrameMulti.",
     controls: "SPACE: Toggle compression",
-    version: "0.21 Nightly",
     factory: () => new CompressionShowcase(),
   },
 

@@ -9,39 +9,39 @@ importers:
   .:
     dependencies:
       '@primitiv/engine':
-        specifier: 0.21.0-nightly.20260308225608.e7edbdc
-        version: 0.21.0-nightly.20260308225608.e7edbdc
+        specifier: 0.21.0
+        version: 0.21.0
 
 packages:
 
-  '@primitiv/core@0.21.0-nightly.20260308225608.e7edbdc':
-    resolution: {integrity: sha512-dE6XQ/VhziIpGxFtwkVhrRJ9iSmYQW9/WUGoyrvqxtKQuCTpSfoHwO/0H6QRNjxdSLVKVQjzGIQ/UGnT+cupIg==}
+  '@primitiv/core@0.21.0':
+    resolution: {integrity: sha512-8MbFVR3CwMTRrERPWpBlxOHIczWHKSjqPDL0XDxc77N5f6xF7ar3MxcG+PtZAoG1FmgF8M8KZHbDaGyOTbTjiQ==}
     engines: {node: '>=18.0.0'}
 
-  '@primitiv/engine@0.21.0-nightly.20260308225608.e7edbdc':
-    resolution: {integrity: sha512-C+jZ8rgcTu3p4kU92hSCwgGgqpE3dNA2kZhWXhQgiBa+pslhOK8HCxBRl+vr2yembRJU8zBIh4iYHLdevjtATg==}
+  '@primitiv/engine@0.21.0':
+    resolution: {integrity: sha512-ScPxTPfq6cDiTFk91NkH0bpcMQ0NXkqQBFdIkHENGn2xuF1vbKbp3UiT5iL0v8NeGkgbWOoI+bNniAyR8hC88Q==}
     engines: {node: '>=18.0.0'}
 
-  '@primitiv/logger@0.21.0-nightly.20260308225608.e7edbdc':
-    resolution: {integrity: sha512-XBNOFnaPirippukqVe+cQn078CoWriPfOxvjvlYBS75dDhTfzwDaC9UTQSEWNfGepv4x4Uss2nOqTuV5ZVRPfA==}
+  '@primitiv/logger@0.21.0':
+    resolution: {integrity: sha512-IQxsAWUPYedBAPSBkpB4583EomLCgwKQJx3nKZEGD+mrjpvaKa2mnKeWUcn1q2er9slKnI+gE8JJ4OsvNy+SQQ==}
     engines: {node: '>=18.0.0'}
 
-  '@primitiv/types@0.21.0-nightly.20260308225608.e7edbdc':
-    resolution: {integrity: sha512-qTJxfAe208ptkPR+T62mq6AhKXgOxvbvHrfJJh9LENFuoup7EswTD+eMlpp12IppeaVyJJU2MBND0qTEN5JHmA==}
+  '@primitiv/types@0.21.0':
+    resolution: {integrity: sha512-SfQPgZuj27uNlXDIRrVgU2pCj0ALo9+HhcsaN5Ra6Toi/sUXtTvel3HnQ6uw7rFJ4SLI74aq5qWnd+iZ/Gj4kQ==}
     engines: {node: '>=18.0.0'}
 
 snapshots:
 
-  '@primitiv/core@0.21.0-nightly.20260308225608.e7edbdc':
+  '@primitiv/core@0.21.0':
     dependencies:
-      '@primitiv/logger': 0.21.0-nightly.20260308225608.e7edbdc
-      '@primitiv/types': 0.21.0-nightly.20260308225608.e7edbdc
+      '@primitiv/logger': 0.21.0
+      '@primitiv/types': 0.21.0
 
-  '@primitiv/engine@0.21.0-nightly.20260308225608.e7edbdc':
+  '@primitiv/engine@0.21.0':
     dependencies:
-      '@primitiv/core': 0.21.0-nightly.20260308225608.e7edbdc
-      '@primitiv/types': 0.21.0-nightly.20260308225608.e7edbdc
+      '@primitiv/core': 0.21.0
+      '@primitiv/types': 0.21.0
 
-  '@primitiv/logger@0.21.0-nightly.20260308225608.e7edbdc': {}
+  '@primitiv/logger@0.21.0': {}
 
-  '@primitiv/types@0.21.0-nightly.20260308225608.e7edbdc': {}
+  '@primitiv/types@0.21.0': {}
