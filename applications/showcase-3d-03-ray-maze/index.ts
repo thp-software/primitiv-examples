@@ -49,6 +49,7 @@ import {
   Display,
   Vector2,
   OrderBuilder,
+  FrameCompression,
   type IApplication,
   type IRuntime,
   ScalingMode,
@@ -792,7 +793,13 @@ export class RayMazeApp implements IApplication<Engine, User<RayMazeData>> {
 
     // Use subFrameMulti to send the entire massive grid in one efficient binary payload.
     state.gameLayer.setOrders([
-      OrderBuilder.subFrameMulti(0, 0, WIDTH, HEIGHT, finalDots as any),
+      OrderBuilder.subFrameMulti(0, 0, WIDTH, HEIGHT, finalDots as any, {
+        compression: {
+            chars: FrameCompression.Auto,
+            fg: FrameCompression.Auto,
+            bg: FrameCompression.Auto
+        }
+      }),
     ]);
     // Layer commits are mandatory to signal the engine that data is ready to be sent to the client renderer.
 

@@ -42,6 +42,7 @@ import {
   Display,
   OrderBuilder,
   Vector2,
+  FrameCompression,
   type IApplication,
   type IRuntime,
 } from '@primitiv/engine';
@@ -206,7 +207,13 @@ export class SimpleMatrix implements IApplication<Engine, User<SimpleMatrixUserD
      * In Connected (Server) mode, this wastes massive bandwidth for cells that did not change.
      */
     if (frameData.length > 0) {
-      const order = OrderBuilder.subFrameMulti(0, 0, width, height, frameData);
+      const order = OrderBuilder.subFrameMulti(0, 0, width, height, frameData, {
+        compression: {
+          chars: FrameCompression.Auto,
+          fg: FrameCompression.Auto,
+          bg: FrameCompression.Auto,
+        },
+      });
       layer.setOrders([order]);
     }
 

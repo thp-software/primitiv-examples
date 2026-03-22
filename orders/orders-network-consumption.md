@@ -398,6 +398,21 @@ The network type is a single `OrderType.Shape`, but the size depends on the `sha
 
 > **Example:** **2 bytes** total - the absolute minimum an order can cost in this protocol (1 byte for type + 1 for sprite ID). Fills an entire layer of any size with a full-color sprite. Unbeatable for static background layers. At 60 ticks/s: **120 B/s**.
 
+## 26) DotCloudIndexed
+
+- **Method**: `dotCloudIndexed(...)`
+- **Type**: `OrderType.DotCloudIndexed`
+- **Description**: cloud of dots where each dot references a variant from a library provided in the header. Extremely efficient when many dots share a small set of visual properties.
+- **Header**: `4 + V × (C + 2)`
+  - `type(1) + variantCount-1(1) + count(U16BE) + V variants`
+  - one variant = `char(C) + bg(1) + fg(1)`
+- **Dynamic payload**: `N × 3`
+  - per dot: `variantIndex(1) + x(1) + y(1)`
+
+> **Example 1 - dense particle system (2 000 dots, 3 variants):** In 8-bit: `(4 + 3 × 3) + (2 000 × 3)` = `13 + 6 000` = **6 013 bytes**. Compare to `DotCloudMulti` at 10 003 bytes. DotCloudIndexed saves **40%** bandwidth while maintaining high visual density.
+>
+> **Example 2 - background stars (500 dots, 2 variants):** `(4 + 2 × 3) + (500 × 3)` = `10 + 1 500` = **1 510 bytes**. Compare to 500 individual `Char` orders (3 000 bytes) or `DotCloudMulti` (2 503 bytes). Indexed clouds are the most efficient way to render mass positioned elements with varied appearances.
+
 ---
 
 ## Why does the header size differ between 8-bit and 16-bit?

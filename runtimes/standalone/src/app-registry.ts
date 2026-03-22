@@ -35,6 +35,8 @@ import { PostProcessShowcase } from "../../../applications/14-post-process";
 import { MultiUserShowcase } from "../../../applications/15-multi-user";
 import { Cp437Table } from "../../../applications/16-cp437";
 import { CompressionShowcase } from "../../../applications/17-frame-compression";
+import { BitmaskCompressionShowcase } from "../../../applications/18-bitmask-compression";
+import { InterpolationShowcase } from "../../../applications/19-display-interpolation";
 
 import { VoxelSpaceApp } from "../../../applications/showcase-3d-01-voxel-space";
 import { PrimitivCraft } from "../../../applications/showcase-3d-02-primitiv-craft";
@@ -189,6 +191,19 @@ export const APP_REGISTRY: AppEntry[] = [
       "Demonstrates Frame Compression for subFrameMulti & FrameMulti.",
     controls: "SPACE: Toggle compression",
     factory: () => new CompressionShowcase(),
+  },
+  {
+    slug: "18-bitmask-compression",
+    name: "18 Bitmask Compression",
+    description: "Demonstrates Frame Compression for Bitmask, Bitmask4 & Bitmask16.",
+    controls: "SPACE: Toggle compression",
+    factory: () => new BitmaskCompressionShowcase(),
+  },
+  {
+    slug: "19-display-interpolation",
+    name: "19 Display Interpolation",
+    description: "⚠️ EXPERIMENTAL: Avoid in production. Smoothens background rendering when a camera follows a player.",
+    factory: () => new InterpolationShowcase(),
   },
 
   // ── Showcases ────────────────────────────────────────────────────────────

@@ -34,7 +34,20 @@
  *   - Dirty flag (topdownRenderNeeded) to avoid redundant reliable commits
  */
 
-import { Display, Engine, type IApplication, InputDeviceType, type IRuntime, KeyboardInput, Layer, OrderBuilder, ScalingMode, User, Vector2 } from "@primitiv/engine";
+import {
+  Engine,
+  User,
+  Layer,
+  Display,
+  OrderBuilder,
+  Vector2,
+  ScalingMode,
+  FrameCompression,
+  InputDeviceType,
+  KeyboardInput,
+  type IApplication,
+  type IRuntime,
+} from "@primitiv/engine";
 
 const TICK_RATE = 30;
 const STAR_COUNT = 800;
@@ -842,7 +855,13 @@ export class Spaceship implements IApplication<Engine, User<StarshipData>> {
         }
 
         cockpitLayer.setOrders([
-            OrderBuilder.fullFrameMulti(frameData as any)
+            OrderBuilder.fullFrameMulti(frameData as any, {
+                compression: {
+                    chars: FrameCompression.Auto,
+                    fg: FrameCompression.Auto,
+                    bg: FrameCompression.Auto
+                }
+            })
         ]);
 
     }

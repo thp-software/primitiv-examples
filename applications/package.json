@@ -3,6 +3,6 @@
   "private": true,
   "type": "module",
   "dependencies": {
-    "@primitiv/engine": "0.21.0"
+    "@primitiv/engine": "^0.22.0"
   }
 }

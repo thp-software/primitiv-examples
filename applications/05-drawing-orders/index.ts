@@ -75,6 +75,7 @@ import {
   Display,
   OrderBuilder,
   Vector2,
+  FrameCompression,
   type IApplication,
   type IRuntime,
 } from "@primitiv/engine";
@@ -396,7 +397,13 @@ export class DrawingOrders implements IApplication<
       fgColorCode: 1 + (i % 5),
       bgColorCode: 10,
     }));
-    orders.push(OrderBuilder.subFrameMulti(59, 29, 6, 5, sfmData));
+    orders.push(OrderBuilder.subFrameMulti(59, 29, 6, 5, sfmData, {
+      compression: {
+        chars: FrameCompression.Auto,
+        fg: FrameCompression.Auto,
+        bg: FrameCompression.Auto,
+      },
+    }));
 
     // --- fullFrame ---
     /** OrderBuilder.fullFrame(charCodes[], fg, bg) - covers entire layer */
@@ -423,7 +430,13 @@ export class DrawingOrders implements IApplication<
       fgColorCode: 1 + (i % 8),
       bgColorCode: 10,
     }));
-    ffmLayer.setOrders([OrderBuilder.fullFrameMulti(ffmData)]);
+    ffmLayer.setOrders([OrderBuilder.fullFrameMulti(ffmData, {
+      compression: {
+        chars: FrameCompression.Auto,
+        fg: FrameCompression.Auto,
+        bg: FrameCompression.Auto,
+      },
+    })]);
 
     user.addLayer(ffmLayer);
 
@@ -433,14 +446,14 @@ export class DrawingOrders implements IApplication<
     orders.push(OrderBuilder.text(2, 37, "[ BITMASKS ]", 4, 0));
 
     // --- bitmask ---
-    /** OrderBuilder.bitmask(x, y, w, h, boolGrid[], char, fg, bg) */
+    /** OrderBuilder.bitmask(x, y, w, h, boolGrid[], char, fg, bg, override, compression) */
     orders.push(OrderBuilder.text(2, 39, "bitmask", 1, 0));
     const bm2Grid = Array.from({ length: 48 }, () => Math.random() > 0.5);
-    orders.push(OrderBuilder.bitmask(2, 41, 8, 6, bm2Grid, "#", 2, 0));
+    orders.push(OrderBuilder.bitmask(2, 41, 8, 6, bm2Grid, "#", 2, 0, false, FrameCompression.Auto));
 
     // --- bitmask4 ---
     /**
-     * OrderBuilder.bitmask4(x, y, w, h, stateGrid[], variants[3])
+     * OrderBuilder.bitmask4(x, y, w, h, stateGrid[], variants[3], override, compression)
      * 4 possible states per cell: 0 = empty (transparent), 1-3 = variant.
      * Exactly 3 variants must be provided.
      */
@@ -452,12 +465,12 @@ export class DrawingOrders implements IApplication<
         { char: ":", fgColor: 2, bgColor: 0 }, // state 1 (Blue Colon)
         { char: "#", fgColor: 3, bgColor: 0 }, // state 2
         { char: "@", fgColor: 4, bgColor: 0 }, // state 3
-      ]),
+      ], false, FrameCompression.Auto),
     );
 
     // --- bitmask16 ---
     /**
-     * OrderBuilder.bitmask16(x, y, w, h, stateGrid[], variants[15])
+     * OrderBuilder.bitmask16(x, y, w, h, stateGrid[], variants[15], override, compression)
      * 16 possible states per cell: 0 = empty (transparent), 1-15 = variant.
      * Up to 15 variants must be provided.
      */
@@ -481,7 +494,7 @@ export class DrawingOrders implements IApplication<
       { char: ">", fgColor: 7, bgColor: 10 }, // state 14
       { char: "X", fgColor: 1, bgColor: 10 }, // state 15
     ];
-    orders.push(OrderBuilder.bitmask16(26, 41, 8, 6, bm16Grid, bm16Variants));
+    orders.push(OrderBuilder.bitmask16(26, 41, 8, 6, bm16Grid, bm16Variants, false, FrameCompression.Auto));
 
     // =====================================================================
     // SECTION 6: SPRITES (y = 37, right side)
@@ -596,6 +609,24 @@ export class DrawingOrders implements IApplication<
         { posX: 75, posY: 59, spriteIndex: 3 },
       ]),
     );
+
+    // --- dotCloudIndexed ---
+    /** OrderBuilder.dotCloudIndexed(variants, dots) - references a palette of variants */
+    orders.push(OrderBuilder.text(84, 52, "dotClIdx", 1, 0));
+    const variants = [
+      { char: ".", fg: 8, bg: 255 }, // variantIndex 0
+      { char: "*", fg: 3, bg: 255 }, // variantIndex 1
+      { char: "+", fg: 4, bg: 255 }, // variantIndex 2
+    ];
+    const indexedDots = [];
+    for (let i = 0; i < 400; i++) {
+      indexedDots.push({
+        x: 84 + Math.floor(Math.random() * 12),
+        y: 54 + Math.floor(Math.random() * 8),
+        variantIndex: i % variants.length,
+      });
+    }
+    orders.push(OrderBuilder.dotCloudIndexed(variants, indexedDots));
 
     // Apply main layer orders and commit.
     layer.setOrders(orders);

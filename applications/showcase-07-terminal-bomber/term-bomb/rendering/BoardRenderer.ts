@@ -2,7 +2,7 @@
  * BoardRenderer - Renders the game board and overlays for Bomberman.
  * Responsible for layering (static map, destructibles, items, bombs, explosions, players, UI).
  */
-import { Layer, OrderBuilder, User } from "@primitiv/engine";
+import { Layer, OrderBuilder, User, FrameCompression } from "@primitiv/engine";
 import {
   C,
   EXPLOSION_CHARS,
@@ -380,6 +380,8 @@ export class BoardRenderer {
         TILES.brick.char,
         TILES.brick.fg,
         TILES.brick.bg,
+        false,
+        FrameCompression.Auto
       ),
     ];
   }

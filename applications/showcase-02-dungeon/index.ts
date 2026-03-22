@@ -42,6 +42,7 @@ import {
   Vector2,
   InputDeviceType,
   KeyboardInput,
+  FrameCompression,
   type IApplication,
   type IRuntime,
 } from "@primitiv/engine";
@@ -601,7 +602,7 @@ export class DungeonApp implements IApplication<Engine, User<any>> {
           fg: TILE_VIS[Tile.LockedDoor].fg,
           bg: 0,
         },
-      ]),
+      ], false, FrameCompression.Auto),
     ]);
 
   }
