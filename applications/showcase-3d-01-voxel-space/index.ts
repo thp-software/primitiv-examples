@@ -59,6 +59,7 @@ import {
   Display,
   Vector2,
   OrderBuilder,
+  FrameCompression,
   type IApplication,
   type IRuntime,
   ScalingMode,
@@ -440,7 +441,13 @@ export class VoxelSpaceApp implements IApplication<Engine, User<VoxelData>> {
 
     // Use subFrameMulti to send the entire massive grid in one efficient binary payload.
     state.gameLayer.setOrders([
-      OrderBuilder.subFrameMulti(0, 0, WIDTH, HEIGHT, dots as any),
+      OrderBuilder.subFrameMulti(0, 0, WIDTH, HEIGHT, dots as any, {
+        compression: {
+          chars: FrameCompression.Auto,
+          fg: FrameCompression.Auto,
+          bg: FrameCompression.Auto,
+        },
+      }),
     ]);
     // Layer commits are mandatory to signal the engine that data is ready to be sent to the client renderer.
 

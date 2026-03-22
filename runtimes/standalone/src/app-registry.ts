@@ -35,7 +35,8 @@ import { PostProcessShowcase } from "../../../applications/14-post-process";
 import { MultiUserShowcase } from "../../../applications/15-multi-user";
 import { Cp437Table } from "../../../applications/16-cp437";
 import { CompressionShowcase } from "../../../applications/17-frame-compression";
-
+import { BitmaskCompressionShowcase } from "../../../applications/18-bitmask-compression";
+import { InterpolationShowcase } from "../../../applications/19-display-interpolation";
 
 import { VoxelSpaceApp } from "../../../applications/showcase-3d-01-voxel-space";
 import { PrimitivCraft } from "../../../applications/showcase-3d-02-primitiv-craft";
@@ -53,6 +54,7 @@ import { Minimal } from "../../../applications/showcase-08-snake";
 import { Pong } from "../../../applications/showcase-09-pong";
 import { Breakout } from "../../../applications/showcase-10-breakout";
 import { MyGame } from "../../../applications/showcase-11-minimal-example";
+import { ParallaxCity } from "../../../applications/showcase-12-parallax-city";
 
 export const APP_REGISTRY: AppEntry[] = [
   {
@@ -129,7 +131,8 @@ export const APP_REGISTRY: AppEntry[] = [
     name: "10 Audio",
     description:
       "Loops, one-shots, effects (LPF/HPF/reverb/pitch), 2D spatial audio.",
-    controls: "Arrows: Move Listener | Space: Toggle Rain | C: Click | V: Thunder",
+    controls:
+      "Arrows: Move Listener | Space: Toggle Rain | C: Click | V: Thunder",
     features: [
       "Spatial audio listener positioning",
       "Dynamic sound loading and effect filters",
@@ -184,11 +187,24 @@ export const APP_REGISTRY: AppEntry[] = [
   {
     slug: "17-frame-compression",
     name: "17 Frame Compression",
-    description: "Demonstrates Frame Compression for subFrameMulti & FrameMulti.",
+    description:
+      "Demonstrates Frame Compression for subFrameMulti & FrameMulti.",
     controls: "SPACE: Toggle compression",
     factory: () => new CompressionShowcase(),
   },
-
+  {
+    slug: "18-bitmask-compression",
+    name: "18 Bitmask Compression",
+    description: "Demonstrates Frame Compression for Bitmask, Bitmask4 & Bitmask16.",
+    controls: "SPACE: Toggle compression",
+    factory: () => new BitmaskCompressionShowcase(),
+  },
+  {
+    slug: "19-display-interpolation",
+    name: "19 Display Interpolation",
+    description: "⚠️ EXPERIMENTAL: Avoid in production. Smoothens background rendering when a camera follows a player.",
+    factory: () => new InterpolationShowcase(),
+  },
 
   // ── Showcases ────────────────────────────────────────────────────────────
   {
@@ -218,8 +234,7 @@ export const APP_REGISTRY: AppEntry[] = [
   {
     slug: "showcase-3d-04-wireframe-3d",
     name: "Synthwave AI",
-    description:
-      "Infinite retro-city dodging game with AI autopilot.",
+    description: "Infinite retro-city dodging game with AI autopilot.",
     category: "showcase-3d",
     factory: () => new Wireframe3DShowcase(),
   },
@@ -270,7 +285,8 @@ export const APP_REGISTRY: AppEntry[] = [
   {
     slug: "showcase-06-fluid",
     name: "06 Navier-Stokes Fluid",
-    description: "Navier-Stokes based autonomous fluid simulation with pressure solvers.",
+    description:
+      "Navier-Stokes based autonomous fluid simulation with pressure solvers.",
     controls: "None (Autonomous Simulation)",
     category: "showcase",
     factory: () => new FluidShowcase(),
@@ -314,10 +330,20 @@ export const APP_REGISTRY: AppEntry[] = [
   {
     slug: "showcase-11-minimal-example",
     name: "11 Minimal Code Example",
-    description: "A minimal interactive code example used for articles and tutorials.",
+    description:
+      "A minimal interactive code example used for articles and tutorials.",
     controls: "Arrow Keys: Move character",
     category: "showcase",
     factory: () => new MyGame(),
+  },
+  {
+    slug: "showcase-12-parallax-city",
+    name: "12 Parallax City",
+    description:
+      "Moody rainy cityscape with multi-layer parallax scrolling, procedural buildings, animated cars, and atmospheric lightning storms.",
+    controls: "← →  / Drag: Scroll | L: Trigger lightning",
+    category: "showcase",
+    factory: () => new ParallaxCity(),
   },
 ];
 

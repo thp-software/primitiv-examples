@@ -18,6 +18,7 @@ import {
   Display,
   OrderBuilder,
   Vector2,
+  FrameCompression,
   type IApplication,
   type IRuntime,
 } from "@primitiv/engine";
@@ -112,7 +113,13 @@ export class Cp437Table implements IApplication<Engine, User<Cp437UserData>> {
         { charCode: "♪", fgColorCode: cc(0x0d), bgColorCode: BG },
         { charCode: "♫", fgColorCode: cc(0x0e), bgColorCode: BG },
         { charCode: "☼", fgColorCode: cc(0x0f), bgColorCode: BG },
-      ]),
+      ], {
+        compression: {
+          chars: FrameCompression.Auto,
+          fg: FrameCompression.Auto,
+          bg: FrameCompression.Auto,
+        },
+      }),
     );
     orders.push(OrderBuilder.text(0, 3, "n>", HDR, BG));
     orders.push(
@@ -133,7 +140,13 @@ export class Cp437Table implements IApplication<Engine, User<Cp437UserData>> {
         { charCode: 0x0d, fgColorCode: cc(0x0d), bgColorCode: BG },
         { charCode: 0x0e, fgColorCode: cc(0x0e), bgColorCode: BG },
         { charCode: 0x0f, fgColorCode: cc(0x0f), bgColorCode: BG },
-      ]),
+      ], {
+        compression: {
+          chars: FrameCompression.Auto,
+          fg: FrameCompression.Auto,
+          bg: FrameCompression.Auto,
+        },
+      }),
     );
 
     // ── Group 0x10-0x1F ──
@@ -177,7 +190,13 @@ export class Cp437Table implements IApplication<Engine, User<Cp437UserData>> {
         { charCode: 0x1d, fgColorCode: cc(0x1d), bgColorCode: BG },
         { charCode: 0x1e, fgColorCode: cc(0x1e), bgColorCode: BG },
         { charCode: 0x1f, fgColorCode: cc(0x1f), bgColorCode: BG },
-      ]),
+      ], {
+        compression: {
+          chars: FrameCompression.Auto,
+          fg: FrameCompression.Auto,
+          bg: FrameCompression.Auto,
+        },
+      }),
     );
 
     // ── Group 0x20-0x2F ──
@@ -221,7 +240,13 @@ export class Cp437Table implements IApplication<Engine, User<Cp437UserData>> {
         { charCode: 0x2d, fgColorCode: cc(0x2d), bgColorCode: BG },
         { charCode: 0x2e, fgColorCode: cc(0x2e), bgColorCode: BG },
         { charCode: 0x2f, fgColorCode: cc(0x2f), bgColorCode: BG },
-      ]),
+      ], {
+        compression: {
+          chars: FrameCompression.Auto,
+          fg: FrameCompression.Auto,
+          bg: FrameCompression.Auto,
+        },
+      }),
     );
 
     // ── Group 0x30-0x3F ──
@@ -265,7 +290,13 @@ export class Cp437Table implements IApplication<Engine, User<Cp437UserData>> {
         { charCode: 0x3d, fgColorCode: cc(0x3d), bgColorCode: BG },
         { charCode: 0x3e, fgColorCode: cc(0x3e), bgColorCode: BG },
         { charCode: 0x3f, fgColorCode: cc(0x3f), bgColorCode: BG },
-      ]),
+      ], {
+        compression: {
+          chars: FrameCompression.Auto,
+          fg: FrameCompression.Auto,
+          bg: FrameCompression.Auto,
+        },
+      }),
     );
 
     // ── Group 0x40-0x4F ──
@@ -309,7 +340,13 @@ export class Cp437Table implements IApplication<Engine, User<Cp437UserData>> {
         { charCode: 0x4d, fgColorCode: cc(0x4d), bgColorCode: BG },
         { charCode: 0x4e, fgColorCode: cc(0x4e), bgColorCode: BG },
         { charCode: 0x4f, fgColorCode: cc(0x4f), bgColorCode: BG },
-      ]),
+      ], {
+        compression: {
+          chars: FrameCompression.Auto,
+          fg: FrameCompression.Auto,
+          bg: FrameCompression.Auto,
+        },
+      }),
     );
 
     // ── Group 0x50-0x5F ──
@@ -353,7 +390,13 @@ export class Cp437Table implements IApplication<Engine, User<Cp437UserData>> {
         { charCode: 0x5d, fgColorCode: cc(0x5d), bgColorCode: BG },
         { charCode: 0x5e, fgColorCode: cc(0x5e), bgColorCode: BG },
         { charCode: 0x5f, fgColorCode: cc(0x5f), bgColorCode: BG },
-      ]),
+      ], {
+        compression: {
+          chars: FrameCompression.Auto,
+          fg: FrameCompression.Auto,
+          bg: FrameCompression.Auto,
+        },
+      }),
     );
 
     // ── Group 0x60-0x6F ──
@@ -397,7 +440,13 @@ export class Cp437Table implements IApplication<Engine, User<Cp437UserData>> {
         { charCode: 0x6d, fgColorCode: cc(0x6d), bgColorCode: BG },
         { charCode: 0x6e, fgColorCode: cc(0x6e), bgColorCode: BG },
         { charCode: 0x6f, fgColorCode: cc(0x6f), bgColorCode: BG },
-      ]),
+      ], {
+        compression: {
+          chars: FrameCompression.Auto,
+          fg: FrameCompression.Auto,
+          bg: FrameCompression.Auto,
+        },
+      }),
     );
 
     // ── Group 0x70-0x7F ──
@@ -441,7 +490,13 @@ export class Cp437Table implements IApplication<Engine, User<Cp437UserData>> {
         { charCode: 0x7d, fgColorCode: cc(0x7d), bgColorCode: BG },
         { charCode: 0x7e, fgColorCode: cc(0x7e), bgColorCode: BG },
         { charCode: 0x7f, fgColorCode: cc(0x7f), bgColorCode: BG },
-      ]),
+      ], {
+        compression: {
+          chars: FrameCompression.Auto,
+          fg: FrameCompression.Auto,
+          bg: FrameCompression.Auto,
+        },
+      }),
     );
 
     // ── Group 0x80-0x8F (right col, y=2) ──
@@ -485,7 +540,13 @@ export class Cp437Table implements IApplication<Engine, User<Cp437UserData>> {
         { charCode: 0x8d, fgColorCode: cc(0x8d), bgColorCode: BG },
         { charCode: 0x8e, fgColorCode: cc(0x8e), bgColorCode: BG },
         { charCode: 0x8f, fgColorCode: cc(0x8f), bgColorCode: BG },
-      ]),
+      ], {
+        compression: {
+          chars: FrameCompression.Auto,
+          fg: FrameCompression.Auto,
+          bg: FrameCompression.Auto,
+        },
+      }),
     );
 
     // ── Group 0x90-0x9F (right col, y=5) ──
@@ -529,7 +590,13 @@ export class Cp437Table implements IApplication<Engine, User<Cp437UserData>> {
         { charCode: 0x9d, fgColorCode: cc(0x9d), bgColorCode: BG },
         { charCode: 0x9e, fgColorCode: cc(0x9e), bgColorCode: BG },
         { charCode: 0x9f, fgColorCode: cc(0x9f), bgColorCode: BG },
-      ]),
+      ], {
+        compression: {
+          chars: FrameCompression.Auto,
+          fg: FrameCompression.Auto,
+          bg: FrameCompression.Auto,
+        },
+      }),
     );
 
     // ── Group 0xA0-0xAF (right col, y=8) ──
@@ -573,7 +640,13 @@ export class Cp437Table implements IApplication<Engine, User<Cp437UserData>> {
         { charCode: 0xad, fgColorCode: cc(0xad), bgColorCode: BG },
         { charCode: 0xae, fgColorCode: cc(0xae), bgColorCode: BG },
         { charCode: 0xaf, fgColorCode: cc(0xaf), bgColorCode: BG },
-      ]),
+      ], {
+        compression: {
+          chars: FrameCompression.Auto,
+          fg: FrameCompression.Auto,
+          bg: FrameCompression.Auto,
+        },
+      }),
     );
 
     // ── Group 0xB0-0xBF (right col, y=11) ──
@@ -617,7 +690,13 @@ export class Cp437Table implements IApplication<Engine, User<Cp437UserData>> {
         { charCode: 0xbd, fgColorCode: cc(0xbd), bgColorCode: BG },
         { charCode: 0xbe, fgColorCode: cc(0xbe), bgColorCode: BG },
         { charCode: 0xbf, fgColorCode: cc(0xbf), bgColorCode: BG },
-      ]),
+      ], {
+        compression: {
+          chars: FrameCompression.Auto,
+          fg: FrameCompression.Auto,
+          bg: FrameCompression.Auto,
+        },
+      }),
     );
 
     // ── Group 0xC0-0xCF (right col, y=14) ──
@@ -661,7 +740,13 @@ export class Cp437Table implements IApplication<Engine, User<Cp437UserData>> {
         { charCode: 0xcd, fgColorCode: cc(0xcd), bgColorCode: BG },
         { charCode: 0xce, fgColorCode: cc(0xce), bgColorCode: BG },
         { charCode: 0xcf, fgColorCode: cc(0xcf), bgColorCode: BG },
-      ]),
+      ], {
+        compression: {
+          chars: FrameCompression.Auto,
+          fg: FrameCompression.Auto,
+          bg: FrameCompression.Auto,
+        },
+      }),
     );
 
     // ── Group 0xD0-0xDF (right col, y=17) ──
@@ -705,7 +790,13 @@ export class Cp437Table implements IApplication<Engine, User<Cp437UserData>> {
         { charCode: 0xdd, fgColorCode: cc(0xdd), bgColorCode: BG },
         { charCode: 0xde, fgColorCode: cc(0xde), bgColorCode: BG },
         { charCode: 0xdf, fgColorCode: cc(0xdf), bgColorCode: BG },
-      ]),
+      ], {
+        compression: {
+          chars: FrameCompression.Auto,
+          fg: FrameCompression.Auto,
+          bg: FrameCompression.Auto,
+        },
+      }),
     );
 
     // ── Group 0xE0-0xEF (right col, y=20) ──
@@ -749,7 +840,13 @@ export class Cp437Table implements IApplication<Engine, User<Cp437UserData>> {
         { charCode: 0xed, fgColorCode: cc(0xed), bgColorCode: BG },
         { charCode: 0xee, fgColorCode: cc(0xee), bgColorCode: BG },
         { charCode: 0xef, fgColorCode: cc(0xef), bgColorCode: BG },
-      ]),
+      ], {
+        compression: {
+          chars: FrameCompression.Auto,
+          fg: FrameCompression.Auto,
+          bg: FrameCompression.Auto,
+        },
+      }),
     );
 
     // ── Group 0xF0-0xFF (right col, y=23) ──
@@ -793,7 +890,13 @@ export class Cp437Table implements IApplication<Engine, User<Cp437UserData>> {
         { charCode: 0xfd, fgColorCode: cc(0xfd), bgColorCode: BG },
         { charCode: 0xfe, fgColorCode: cc(0xfe), bgColorCode: BG },
         { charCode: 0xff, fgColorCode: cc(0xff), bgColorCode: BG },
-      ]),
+      ], {
+        compression: {
+          chars: FrameCompression.Auto,
+          fg: FrameCompression.Auto,
+          bg: FrameCompression.Auto,
+        },
+      }),
     );
 
     layer.setOrders(orders);

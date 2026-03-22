@@ -4,6 +4,7 @@ import {
   PrimitivClient,
   PrimitivClientBridge,
   PrimitivClientMultiDisplay,
+  PrimitivClientQuad,
 } from "./components/primitiv-client";
 import { RendererType } from "@primitiv/client";
 import { APP_REGISTRY, findApp } from "./app-registry";
@@ -786,6 +787,7 @@ function AppRunnerInner({ entry }: { entry: AppEntry }) {
 
   const isBridgeDemo = entry.slug === "12-bridge-communication";
   const isMultiDisplay = entry.slug === "13-multi-display";
+  const isInterpolationDemo = entry.slug === "19-display-interpolation";
 
   // Applications requiring user interaction before running (for AudioContext or Navigator.vibrate to work)
   const requiresInteraction = [
@@ -877,6 +879,14 @@ function AppRunnerInner({ entry }: { entry: AppEntry }) {
               height={67}
               autoplay={shouldAutoplay}
               displayCount={2}
+              gap={8}
+              style={{ width: "100%", height: "100%" }}
+            />
+          ) : isInterpolationDemo ? (
+            <PrimitivClientQuad
+              application={application}
+              renderer={RendererType.TerminalGL}
+              autoplay={shouldAutoplay}
               gap={8}
               style={{ width: "100%", height: "100%" }}
             />

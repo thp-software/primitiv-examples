@@ -41,6 +41,7 @@ import {
     ScalingMode,
     InputDeviceType,
     MouseInput,
+    FrameCompression,
     type IApplication,
     type IRuntime,
 } from '@primitiv/engine';
@@ -213,7 +214,7 @@ export class GameOfLife implements IApplication<Engine, User<GameOfLifeUserData>
         for (let i = 0; i < SIM_WIDTH * UI_HEIGHT; i++) {
             uiData.push({ charCode: ' ', fgColorCode: 1, bgColorCode: 4 });
         }
-        const uiBgOrder = OrderBuilder.subFrameMulti(0, 0, SIM_WIDTH, UI_HEIGHT, uiData);
+        const uiBgOrder = OrderBuilder.subFrameMulti(0, 0, SIM_WIDTH, UI_HEIGHT, uiData, { compression: { chars: FrameCompression.Auto, fg: FrameCompression.Auto, bg: FrameCompression.Auto } });
 
         // Static Text
         const textOrder = OrderBuilder.text(
@@ -390,13 +391,14 @@ export class GameOfLife implements IApplication<Engine, User<GameOfLifeUserData>
             { char: "█", fgColor: 3, bgColor: 0 }, // Map State 3: Just Died
         ];
 
-        // bitmask4(x, y, w, h, maskData, variants, override)
+        // bitmask4(x, y, w, h, maskData, variants, override, compression)
         // override=false allows it to overlay cleanly on the background layer behind it.
         const layerOrder = OrderBuilder.bitmask4(
             0, 0, SIM_WIDTH, SIM_HEIGHT,
             data.grid,
             simulationVariants,
-            false
+            false,
+            FrameCompression.Auto
         );
         data.layer.setOrders([layerOrder]);
 

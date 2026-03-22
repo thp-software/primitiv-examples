@@ -57,6 +57,7 @@ import {
   OrderBuilder,
   Vector2,
   ScalingMode,
+  FrameCompression,
   type IApplication,
   type IRuntime,
 } from "@primitiv/engine";
@@ -761,7 +762,13 @@ export class FluidShowcase implements IApplication<Engine, User<FluidData>> {
 
     // ── 5. Commit to the display ──────────────────────────────────────────
     user.data.fluidLayer.setOrders([
-      OrderBuilder.subFrameMulti(0, 0, W, H, frame as any),
+      OrderBuilder.subFrameMulti(0, 0, W, H, frame as any, {
+        compression: {
+          chars: FrameCompression.Auto,
+          fg: FrameCompression.Auto,
+          bg: FrameCompression.Auto,
+        },
+      }),
     ]);
 
   }

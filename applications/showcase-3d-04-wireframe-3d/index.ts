@@ -39,6 +39,7 @@ import {
     KeyboardInput,
     InputDeviceType,
     ScalingMode,
+    FrameCompression,
     type IApplication,
     type IRuntime,
 } from "@primitiv/engine";
@@ -521,7 +522,13 @@ export class Wireframe3DShowcase implements IApplication<Engine, User<WireframeU
         }
 
         // Submit the entire processed 2D frame buffer as a single binary order
-        o.push(OrderBuilder.subFrameMulti(0, 0, width, height, dots as any));
+        o.push(OrderBuilder.subFrameMulti(0, 0, width, height, dots as any, {
+            compression: {
+                chars: FrameCompression.Auto,
+                fg: FrameCompression.Auto,
+                bg: FrameCompression.Auto
+            }
+        }));
 
         // UI Overlay
         if (data.gameOver) {

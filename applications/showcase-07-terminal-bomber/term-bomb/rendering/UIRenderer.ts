@@ -3,7 +3,7 @@
  * OPTIMIZED: Uses text() and rectangle() instead of char() loops
  */
 
-import { OrderBuilder } from "@primitiv/engine";
+import { OrderBuilder, FrameCompression } from "@primitiv/engine";
 import type { Player } from "../game/types";
 import { C, PLAYER_COLORS, PLAYER_CHARS } from "./Appearance";
 
@@ -728,6 +728,8 @@ export class UIRenderer {
         " ", // Use space - we only care about bg color
         C.HIGHLIGHT, // fg (unused since char is space)
         C.HIGHLIGHT, // bg - this is what shows!
+        false,
+        FrameCompression.Auto
       ),
     );
 
@@ -743,6 +745,8 @@ export class UIRenderer {
         " ",
         C.HIGHLIGHT,
         C.HIGHLIGHT,
+        false,
+        FrameCompression.Auto
       ),
     );
 

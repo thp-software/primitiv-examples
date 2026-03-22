@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Name: custom-sprites
  * Description: Renders the complete GPU atlas side by side - block 0 (CP437, charCodes 0–255)
  *   and block 1 (custom PNG, charCodes 256–511) - as two 16×16 glyph grids exactly as they
@@ -99,6 +99,7 @@ import {
   Vector2,
   InputDeviceType,
   MouseInput,
+  FrameCompression,
   type IApplication,
   type IRuntime,
 } from "@primitiv/engine";
@@ -261,8 +262,20 @@ export class CustomSpritesShowcase implements IApplication<
 
     // subFrameMulti renders a rectangular block of cells in one order call.
     // On a 16-bit layer it correctly encodes charCodes above 255.
-    o.push(OrderBuilder.subFrameMulti(B0_GX, GY, 16, 16, block0Cells));
-    o.push(OrderBuilder.subFrameMulti(B1_GX, GY, 16, 16, block1Cells));
+    o.push(OrderBuilder.subFrameMulti(B0_GX, GY, 16, 16, block0Cells, {
+      compression: {
+        chars: FrameCompression.Auto,
+        fg: FrameCompression.Auto,
+        bg: FrameCompression.Auto,
+      },
+    }));
+    o.push(OrderBuilder.subFrameMulti(B1_GX, GY, 16, 16, block1Cells, {
+      compression: {
+        chars: FrameCompression.Auto,
+        fg: FrameCompression.Auto,
+        bg: FrameCompression.Auto,
+      },
+    }));
 
     // ── Footer ───────────────────────────────────────────────────────────────
     o.push(OrderBuilder.rect(0, 22, W, 1, "-", 5, 0));

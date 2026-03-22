@@ -56,6 +56,7 @@ import {
   OrderBuilder,
   Vector2,
   ScalingMode,
+  FrameCompression,
   type IApplication,
   type IRuntime,
 } from "@primitiv/engine";
@@ -183,7 +184,13 @@ export class ResponsiveDisplay implements IApplication<
     }));
 
     data.layer.setOrders([
-      OrderBuilder.subFrameMulti(0, 0, LAYER_SIZE, LAYER_SIZE, frameData),
+      OrderBuilder.subFrameMulti(0, 0, LAYER_SIZE, LAYER_SIZE, frameData, {
+        compression: {
+          chars: FrameCompression.Auto,
+          fg: FrameCompression.Auto,
+          bg: FrameCompression.Auto,
+        },
+      }),
     ]);
 
     // Commit is required every tick after any setOrders or state change.
