@@ -1,3 +1,27 @@
+/**
+ * Name: 19-display-interpolation
+ * Category: showcase
+ * Description: ⚠️ EXPERIMENTAL: Demonstrates smooth visual background 
+ *   interpolation between server-sent frames, specifically for moving scenes.
+ * 
+ * Architecture:
+ *   - Four parallel Displays, each demonstrating a different interpolation mode
+ *     (NONE, 1 tick, 2 ticks, 4 ticks).
+ *   - Rolling Log Layer Recycling: To simulate an infinite world, three 256x256 
+ *     ground layers per display are recycled (teleported ahead) as the camera 
+ *     moves past them.
+ *   - Mixed Rendering TickRates: Background chunks are expensive to render 
+ *     once-per-connection via `fullFrameMulti` (with frame compression), while 
+ *     the UI/Player layer is updated light every logical tick.
+ * 
+ * Key Primitiv Concepts demonstrated:
+ *   - display.setInterpolation(enabled): Enables geometric smoothing of 
+ *     Layer and Display positions.
+ *   - display.setInterpolationTicks(n): Sets the smoothing window (1-8 ticks).
+ *   - layer.setOrigin(): Precise control of camera view relative to world geometry.
+ *   - VSync-less Snapping: Shows how raw 20Hz ticks appear "jittery" vs 
+ *     how 4-tick interpolation appears "buttery smooth" on high-refresh monitors.
+ */
 import {
     Engine,
     User,
@@ -17,11 +41,6 @@ interface InterpolationData {
     tickCount: number;
 }
 
-/**
- * Name: 19-display-interpolation
- * Description: ⚠️ EXPERIMENTAL: Avoid in production. Smoothens background rendering when a camera follows a player.
- *   Uses an infinite "rolling log" pattern to recycle layers as the camera moves.
- */
 export class InterpolationShowcase implements IApplication<Engine, User<InterpolationData>> {
 
     async init(_runtime: IRuntime, engine: Engine): Promise<void> {
@@ -39,13 +58,15 @@ export class InterpolationShowcase implements IApplication<Engine, User<Interpol
 
     async initUser(_runtime: IRuntime, _engine: Engine, user: User<InterpolationData>): Promise<void> {
         const slots = [];
-        const ticks = [0, 1, 2, 4];
+        const ticks = [0, 1, 2, 4]; // Test cases for interpolation delay
 
         for (let i = 0; i < 4; i++) {
+            // Each test case gets its own dedicated Display
             const d = new Display(i, 64, 36);
             user.addDisplay(d);
             d.switchPalette(0);
 
+            // Configure interpolation for the display
             if (ticks[i] > 0) {
                 d.setInterpolation(true);
                 d.setInterpolationTicks(ticks[i]);
@@ -56,7 +77,9 @@ export class InterpolationShowcase implements IApplication<Engine, User<Interpol
             const startY = (i + 1) * 1000;
             const startZ = i * 4;
 
-            // 3 Ground layers per slot (256x256)
+            // --- Rolling Log: Ground Layer Setup ---
+            // To simulate an infinite scrolling landscape, we use 3 large 
+            // static background layers (256x256) per display.
             const groundLayers: Layer[] = [];
             for (let j = 0; j < 3; j++) {
                 const zIndex = startZ + j;
@@ -148,15 +171,20 @@ export class InterpolationShowcase implements IApplication<Engine, User<Interpol
             const startY = (i + 1) * 1000;
             const targetY = startY + 18;
 
+            // Cam positioning
             const camX = Math.max(0, targetX - 32);
             const camY = startY;
 
+            // Move the entire viewport
             display.setOrigin(new Vector2(camX, camY));
 
             const slot = d.slots[i];
+            // Move the dynamic UI layer along with the camera
             slot.uiLayer.setOrigin(new Vector2(camX, camY));
 
-            // Rondin Recycling
+            // --- Rolling Log: Background Recycling ---
+            // If a background layer is completely behind the camera, 
+            // we "teleport" it to the far right and redraw it.
             for (const groundLayer of slot.groundLayers) {
                 const origin = groundLayer.getOrigin();
                 if (origin.x + 256 < camX) {

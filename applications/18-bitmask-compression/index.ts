@@ -2,7 +2,20 @@
  * Name: 18-bitmask-compression
  * Category: showcase
  * Description: Demonstrates Bitmask, Bitmask4, and Bitmask16 orders 
- *   combined with Frame Compression across 6 scènes (Compressible vs Uncompressible).
+ *   combined with Frame Compression across 6 scenes (Compressible vs Uncompressible).
+ * 
+ * Architecture:
+ *   - Six distinct scenes comparing "favorable" (long runs of identical values) 
+ *     vs "unfavorable" (high entropy/noise) data for compression efficiency.
+ *   - Toggles between FrameCompression.No and FrameCompression.Auto to show 
+ *     bandwidth/performance trade-offs.
+ * 
+ * Key Primitiv Concepts demonstrated:
+ *   - Bitmask (1-bit): Boolean grid optimized for binary shapes/patterns.
+ *   - Bitmask4 (2-bit): State-based grid (0-3) supporting 3 variants + transparency.
+ *   - Bitmask16 (4-bit): State-based grid (0-15) supporting 15 variants + transparency.
+ *   - RLE Compression: High-density state grids are automatically run-length encoded 
+ *     when using FrameCompression.Auto, drastically reducing packet size for patterns.
  */
 import {
   Engine,
@@ -30,6 +43,10 @@ export class BitmaskCompressionShowcase implements IApplication<Engine, User<Bit
   // compressionModeIndex: 0 = No, 1 = Auto
   private cachedSets: Order[][][] = [];
 
+  /**
+   * Application-wide initialization.
+   * We prepare the palette and pre-generate the static masks.
+   */
   async init(runtime: IRuntime, engine: Engine) {
     const palette = [
       { colorId: 0, r: 10, g: 10, b: 18, a: 255 },    // Background
@@ -130,16 +147,28 @@ export class BitmaskCompressionShowcase implements IApplication<Engine, User<Bit
     orders.push(OrderBuilder.text(4, 7, title, type + 1, 0));
     orders.push(OrderBuilder.text(4, 8, "------------------------------------------------------------", 9, 0));
 
+    // --- bitmask ---
     if (type === 1) {
+      // 1-bit boolean mask: 0=transparent, 1=foreground
       orders.push(OrderBuilder.bitmask(4, 10, 32, 32, mask, '#', 1, 255, false, comp));
-    } else if (type === 2) {
+    }
+    // --- bitmask4 ---
+    else if (type === 2) {
+      // 2-bit state mask: 0=transparent, 1-3=variants
       orders.push(OrderBuilder.bitmask4(4, 10, 32, 32, mask, v2, false, comp === FrameCompression.No ? FrameCompression.No : FrameCompression.Yes));
-    } else {
+    }
+    // --- bitmask16 ---
+    else {
+      // 4-bit state mask: 0=transparent, 1-15=variants
       orders.push(OrderBuilder.bitmask16(4, 10, 32, 32, mask, v3, false, comp));
     }
     return orders;
   }
 
+  /**
+   * User-specific initialization.
+   * This is called whenever a new browser tab/player connects.
+   */
   async initUser(_runtime: IRuntime, _engine: Engine, user: User<BitmaskCompressionData>) {
     user.addDisplay(new Display(0, 70, 48));
     const layer = new Layer(new Vector2(0, 0), 0, 70, 48);
@@ -153,6 +182,9 @@ export class BitmaskCompressionShowcase implements IApplication<Engine, User<Bit
     }
   }
 
+  /**
+   * Main user loop: Handles input and updates the display orders.
+   */
   updateUser(_runtime: IRuntime, _engine: Engine, user: User<BitmaskCompressionData>) {
     const d = user.data;
     if (user.isJustPressed('toggle')) d.compression = d.compression === FrameCompression.No ? FrameCompression.Auto : FrameCompression.No;
