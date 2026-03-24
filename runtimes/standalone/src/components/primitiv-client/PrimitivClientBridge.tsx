@@ -31,6 +31,8 @@ interface PrimitivClientBridgeProps {
   onBridgeMessage?: (channel: string, data: any) => void;
   /** Callback when the runtime is initialized */
   onRuntimeReady?: (runtime: ClientRuntime) => void;
+  /** Whether the client is in full screen mode */
+  isFullscreen?: boolean;
 }
 
 // =============================================================================
@@ -59,6 +61,7 @@ const PrimitivClientBridge: React.FC<PrimitivClientBridgeProps> = ({
   autoplay = true,
   onBridgeMessage,
   onRuntimeReady,
+  isFullscreen = false,
 }) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const runtimeRef = useRef<ClientRuntime | null>(null);
@@ -135,8 +138,8 @@ const PrimitivClientBridge: React.FC<PrimitivClientBridgeProps> = ({
       className={`primitiv-client ${className}`}
       style={{ display: "flex", ...style }}
     >
-      <div ref={containerRef} style={{ flex: 1 }} />
-      <StatsOverlay runtime={activeRuntime} />
+      <div ref={containerRef} style={{ flex: 1, position: "relative" }} />
+      <StatsOverlay runtime={activeRuntime} show={!isFullscreen} />
     </div>
   );
 };

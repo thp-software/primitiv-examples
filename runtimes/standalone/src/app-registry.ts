@@ -37,11 +37,13 @@ import { Cp437Table } from "../../../applications/16-cp437";
 import { CompressionShowcase } from "../../../applications/17-frame-compression";
 import { BitmaskCompressionShowcase } from "../../../applications/18-bitmask-compression";
 import { InterpolationShowcase } from "../../../applications/19-display-interpolation";
+import { WebGpuClientShowcase } from "../../../applications/20-webgpu-client";
 
 import { VoxelSpaceApp } from "../../../applications/showcase-3d-01-voxel-space";
 import { PrimitivCraft } from "../../../applications/showcase-3d-02-primitiv-craft";
 import { RayMazeApp } from "../../../applications/showcase-3d-03-ray-maze";
 import { Wireframe3DShowcase } from "../../../applications/showcase-3d-04-wireframe-3d";
+import { TerminalWgpuShowcase } from "../../../applications/showcase-3d-05-neon-wireframe";
 
 import { RetroDashboard } from "../../../applications/showcase-01-pseudo-htop";
 import { DungeonApp } from "../../../applications/showcase-02-dungeon";
@@ -195,16 +197,27 @@ export const APP_REGISTRY: AppEntry[] = [
   {
     slug: "18-bitmask-compression",
     name: "18 Bitmask Compression",
-    description: "Demonstrates Frame Compression for Bitmask, Bitmask4 & Bitmask16.",
+    description:
+      "Demonstrates Frame Compression for Bitmask, Bitmask4 & Bitmask16.",
     controls: "SPACE: Toggle compression",
     factory: () => new BitmaskCompressionShowcase(),
   },
   {
     slug: "19-display-interpolation",
     name: "19 Display Interpolation",
-    description: "⚠️ EXPERIMENTAL: Avoid in production. Smoothens background rendering when a camera follows a player.",
+    description:
+      "⚠️ EXPERIMENTAL: Avoid in production. Smoothens background rendering when a camera follows a player.",
     factory: () => new InterpolationShowcase(),
   },
+  {
+    slug: "20-webgpu-client",
+    name: "20 Renderers",
+    description:
+      "Rasterizes a shared scene across three independent displays (2D, GL, WGPU) with dynamically generated emissive palettes creating glowing neon gradients without shaders.",
+    version: "nightly",
+    factory: () => new WebGpuClientShowcase(),
+  },
+
 
   // ── Showcases ────────────────────────────────────────────────────────────
   {
@@ -237,6 +250,15 @@ export const APP_REGISTRY: AppEntry[] = [
     description: "Infinite retro-city dodging game with AI autopilot.",
     category: "showcase-3d",
     factory: () => new Wireframe3DShowcase(),
+  },
+  {
+    slug: "showcase-3d-05-neon-wireframe",
+    name: "Neon Wireframe",
+    description:
+      "A synthwave-themed 3D wireframe terrain renderer with infinite scrolling, procedural mountains, and CRT post-processing effects (curvature, vignette, chromatic aberration) via WGPU.",
+    category: "showcase-3d",
+    version: "nightly",
+    factory: () => new TerminalWgpuShowcase(),
   },
   {
     slug: "showcase-01-pseudo-htop",
