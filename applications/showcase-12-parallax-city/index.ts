@@ -197,18 +197,18 @@ export class ParallaxCity implements IApplication<Engine, User<CityUserData>> {
       { colorId: 23, r: 35, g: 35, b: 40, a: 255 },
       { colorId: 24, r: 60, g: 40, b: 10, a: 255 },
       { colorId: 28, r: 15, g: 15, b: 20, a: 255 },
-      { colorId: 33, r: 180, g: 150, b: 70, a: 255, e: 40 },
+      { colorId: 33, r: 180, g: 150, b: 70, a: 255, e: 0.15 },
       // Road
       { colorId: 25, r: 20, g: 20, b: 25, a: 255 },
       { colorId: 26, r: 40, g: 40, b: 45, a: 255 },
       { colorId: 27, r: 100, g: 100, b: 100, a: 255 },
       // Streetlights
       { colorId: 30, r: 80, g: 80, b: 80, a: 255 },
-      { colorId: 31, r: 255, g: 240, b: 180, a: 255, e: 255 },
+      { colorId: 31, r: 255, g: 240, b: 180, a: 255, e: 0.5 },
       // Cars
       { colorId: 32, r: 120, g: 20, b: 30, a: 255 },
-      { colorId: 34, r: 255, g: 240, b: 120, a: 255, e: 100 },
-      { colorId: 38, r: 255, g: 60, b: 60, a: 255, e: 80 },
+      { colorId: 34, r: 255, g: 240, b: 120, a: 255, e: 0.3 },
+      { colorId: 38, r: 255, g: 60, b: 60, a: 255, e: 0.2 },
       // Mountains (close)
       { colorId: 35, r: 30, g: 35, b: 50, a: 255 },
       { colorId: 36, r: 40, g: 45, b: 60, a: 255 },
@@ -218,11 +218,11 @@ export class ParallaxCity implements IApplication<Engine, User<CityUserData>> {
       { colorId: 48, r: 25, g: 30, b: 50, a: 255 },
       { colorId: 49, r: 30, g: 35, b: 55, a: 255 },
       // Moon
-      { colorId: 40, r: 220, g: 200, b: 100, a: 255, e: 255 },
-      { colorId: 41, r: 180, g: 160, b: 80, a: 255, e: 40 },
+      { colorId: 40, r: 220, g: 200, b: 100, a: 255, e: 0.25 },
+      { colorId: 41, r: 180, g: 160, b: 80, a: 255, e: 0.05 },
       // Lightning
-      { colorId: 45, r: 255, g: 255, b: 255, a: 255, e: 255 },
-      { colorId: 46, r: 200, g: 220, b: 255, a: 255, e: 180 },
+      { colorId: 45, r: 255, g: 255, b: 255, a: 255, e: 0.5 },
+      { colorId: 46, r: 200, g: 220, b: 255, a: 255, e: 0.35 },
     ];
 
     engine.loadPaletteToSlot(0, palette);

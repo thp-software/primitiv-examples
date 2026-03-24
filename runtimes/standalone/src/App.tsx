@@ -6,7 +6,6 @@ import {
   PrimitivClientMultiDisplay,
   PrimitivClientQuad,
   PrimitivClientWGPU,
-  PrimitivClientWGPUSingle,
   FullscreenButton,
 } from "./components/primitiv-client";
 import { RendererType } from "@primitiv/client";
@@ -408,8 +407,9 @@ const ThemeButtons = memo(function ThemeButtons({
             style={{
               padding: "0.6rem",
               backgroundColor: activeTheme === i ? THEME_COLORS[i] : "#1e293b",
-              border: `2px solid ${activeTheme === i ? THEME_COLORS[i] : "#334155"
-                }`,
+              border: `2px solid ${
+                activeTheme === i ? THEME_COLORS[i] : "#334155"
+              }`,
               borderRadius: "8px",
               color: "white",
               fontWeight: 600,
@@ -808,6 +808,9 @@ function AppRunnerInner({ entry }: { entry: AppEntry }) {
   const shouldAutoplay = !requiresInteraction;
 
   const [activeTheme, setActiveTheme] = useState(0);
+  const [selectedRenderer, setSelectedRenderer] = useState<RendererType>(
+    isWgpuShowcase ? RendererType.TerminalWGPU : RendererType.TerminalGL,
+  );
 
   const handleBridgeMessage = useCallback((channel: string, data: any) => {
     setBridgeMessages((prev) =>
@@ -868,7 +871,34 @@ function AppRunnerInner({ entry }: { entry: AppEntry }) {
         <span style={{ color: "#64748b", fontSize: "0.8rem", flex: 1 }}>
           {entry.description}
         </span>
-        <FullscreenButton isFullscreen={isFullscreen} onToggle={toggleFullscreen} />
+        {/* Renderer selector (hidden for the multi-WGPU comparison demo) */}
+        {!isMultiWgpuDemo && (
+          <select
+            value={selectedRenderer}
+            onChange={(e) =>
+              setSelectedRenderer(e.target.value as RendererType)
+            }
+            style={{
+              fontSize: "0.8rem",
+              padding: "0.25rem 0.5rem",
+              borderRadius: "6px",
+              border: "1px solid rgba(255,255,255,0.15)",
+              backgroundColor: "rgba(0,0,0,0.4)",
+              color: "#e2e8f0",
+              cursor: "pointer",
+              outline: "none",
+              backdropFilter: "blur(4px)",
+            }}
+          >
+            <option value={RendererType.Terminal2D}>Terminal 2D</option>
+            <option value={RendererType.TerminalGL}>Terminal GL</option>
+            <option value={RendererType.TerminalWGPU}>Terminal WGPU</option>
+          </select>
+        )}
+        <FullscreenButton
+          isFullscreen={isFullscreen}
+          onToggle={toggleFullscreen}
+        />
       </div>
 
       {/* Main Content Area */}
@@ -886,7 +916,7 @@ function AppRunnerInner({ entry }: { entry: AppEntry }) {
           {isMultiDisplay ? (
             <PrimitivClientMultiDisplay
               application={application}
-              renderer={RendererType.TerminalGL}
+              renderer={selectedRenderer}
               width={120}
               height={67}
               autoplay={shouldAutoplay}
@@ -898,7 +928,7 @@ function AppRunnerInner({ entry }: { entry: AppEntry }) {
           ) : isInterpolationDemo ? (
             <PrimitivClientQuad
               application={application}
-              renderer={RendererType.TerminalGL}
+              renderer={selectedRenderer}
               autoplay={shouldAutoplay}
               gap={8}
               style={{ width: "100%", height: "100%" }}
@@ -907,7 +937,7 @@ function AppRunnerInner({ entry }: { entry: AppEntry }) {
           ) : isBridgeDemo ? (
             <PrimitivClientBridge
               application={application}
-              renderer={RendererType.TerminalGL}
+              renderer={selectedRenderer}
               width={120}
               height={67}
               autoplay={shouldAutoplay}
@@ -926,8 +956,9 @@ function AppRunnerInner({ entry }: { entry: AppEntry }) {
               isFullscreen={isFullscreen}
             />
           ) : isWgpuShowcase ? (
-            <PrimitivClientWGPUSingle
+            <PrimitivClient
               application={application}
+              renderer={selectedRenderer}
               width={120}
               height={67}
               autoplay={shouldAutoplay}
@@ -937,7 +968,7 @@ function AppRunnerInner({ entry }: { entry: AppEntry }) {
           ) : (
             <PrimitivClient
               application={application}
-              renderer={RendererType.TerminalGL}
+              renderer={selectedRenderer}
               width={120}
               height={67}
               autoplay={shouldAutoplay}
@@ -958,7 +989,9 @@ function AppRunnerInner({ entry }: { entry: AppEntry }) {
         )}
 
         {/* Controls Overlay */}
-        {entry.controls && !isFullscreen && <ControlsOverlay controls={entry.controls} />}
+        {entry.controls && !isFullscreen && (
+          <ControlsOverlay controls={entry.controls} />
+        )}
       </div>
     </div>
   );

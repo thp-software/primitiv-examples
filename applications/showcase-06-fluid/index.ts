@@ -598,17 +598,32 @@ export class FluidShowcase implements IApplication<Engine, User<FluidData>> {
     // Build the 216-entry 6×6×6 RGB cube and load it into palette slot 0.
     //   colorId = ri*36 + gi*6 + bi   (ri, gi, bi ∈ 0..5)
     //   R,G,B   = component * 51       (steps: 0, 51, 102, 153, 204, 255)
-    //   colorId 0   = (0,  0,  0) - black (background)
-    //   colorId 215 = (255,255,255) - white
-    const pal: Array<{ colorId: number; r: number; g: number; b: number }> = [];
+    //   colorId 0   = (0,  0,  0) - black (background, e=0)
+    //   colorId 215 = (255,255,255) - white (peak emissive)
+    //
+    // Emissive scales with the brightest channel: dark cells (low dye
+    // concentration) stay flat, while vivid cores glow proportionally.
+    // A quadratic ramp avoids bloom on dim mid-tones and concentrates
+    // the glow on the brightest injection regions.
+    const PEAK_EMISSIVE = 1.5;
+    const pal: Array<{
+      colorId: number;
+      r: number;
+      g: number;
+      b: number;
+      e?: number;
+    }> = [];
     for (let ri = 0; ri < 6; ri++) {
       for (let gi = 0; gi < 6; gi++) {
         for (let bi = 0; bi < 6; bi++) {
+          const brightness = Math.max(ri, gi, bi) / 5; // 0..1
+          const e = brightness * brightness * PEAK_EMISSIVE;
           pal.push({
             colorId: ri * 36 + gi * 6 + bi,
             r: ri * 51,
             g: gi * 51,
             b: bi * 51,
+            ...(e > 0 ? { e } : {}),
           });
         }
       }
@@ -770,6 +785,5 @@ export class FluidShowcase implements IApplication<Engine, User<FluidData>> {
         },
       }),
     ]);
-
   }
 }

@@ -16,6 +16,8 @@ interface PrimitivClientWGPUProps {
   autoplay?: boolean;
   /** Whether the client is in full screen mode */
   isFullscreen?: boolean;
+  /** Whether to show the network/perf stats overlay */
+  showStats?: boolean;
 }
 
 const PrimitivClientWGPU: React.FC<PrimitivClientWGPUProps> = ({
@@ -26,16 +28,19 @@ const PrimitivClientWGPU: React.FC<PrimitivClientWGPUProps> = ({
   style,
   autoplay = true,
   isFullscreen = false,
+  showStats = true,
 }) => {
   const container2dRef = useRef<HTMLDivElement | null>(null);
   const containerGlRef = useRef<HTMLDivElement | null>(null);
   const containerWgpuRef = useRef<HTMLDivElement | null>(null);
-  const runtimeRef = useRef<ClientRuntime | null>(null);
+  const runtime2dRef = useRef<ClientRuntime | null>(null);
+  const runtimeGlRef = useRef<ClientRuntime | null>(null);
+  const runtimeWgpuRef = useRef<ClientRuntime | null>(null);
   const initializedWithKeyRef = useRef<string | null>(null);
 
-  const [activeRuntime, setActiveRuntime] = useState<ClientRuntime | null>(
-    null,
-  );
+  const [rt2d, setRt2d] = useState<ClientRuntime | null>(null);
+  const [rtGl, setRtGl] = useState<ClientRuntime | null>(null);
+  const [rtWgpu, setRtWgpu] = useState<ClientRuntime | null>(null);
 
   const supportsWebGpu = typeof navigator !== "undefined" && "gpu" in navigator;
   const forcedRenderer = RendererType.TerminalWGPU;
@@ -50,16 +55,19 @@ const PrimitivClientWGPU: React.FC<PrimitivClientWGPUProps> = ({
 
     if (initializedWithKeyRef.current === depsKey) return;
 
-    if (runtimeRef.current) {
-      runtimeRef.current.destroy();
-      runtimeRef.current = null;
-    }
+    if (runtime2dRef.current) runtime2dRef.current.destroy();
+    if (runtimeGlRef.current) runtimeGlRef.current.destroy();
+    if (runtimeWgpuRef.current) runtimeWgpuRef.current.destroy();
+    runtime2dRef.current = null;
+    runtimeGlRef.current = null;
+    runtimeWgpuRef.current = null;
+    
     container2d.innerHTML = "";
     containerGl.innerHTML = "";
     containerWgpu.innerHTML = "";
     initializedWithKeyRef.current = depsKey;
 
-    const runtime = new ClientRuntime({
+    const rtT2D = new ClientRuntime({
       mode: "standalone",
       standalone: { application },
       displays: [
@@ -68,28 +76,58 @@ const PrimitivClientWGPU: React.FC<PrimitivClientWGPUProps> = ({
           container: container2d,
           renderer: RendererType.Terminal2D,
         },
-        {
-          displayId: 1,
-          container: containerGl,
-          renderer: RendererType.TerminalGL,
-        },
-        { displayId: 2, container: containerWgpu, renderer: forcedRenderer },
       ],
       autoplay,
       debug: true,
       logLevel: "warn",
     });
 
-    runtimeRef.current = runtime;
-    setActiveRuntime(runtime);
+    const rtTGL = new ClientRuntime({
+      mode: "standalone",
+      standalone: { application },
+      displays: [
+        {
+          displayId: 0,
+          container: containerGl,
+          renderer: RendererType.TerminalGL,
+        },
+      ],
+      autoplay,
+      debug: true,
+      logLevel: "warn",
+    });
+
+    const rtWGPU = new ClientRuntime({
+      mode: "standalone",
+      standalone: { application },
+      displays: [
+        { displayId: 0, container: containerWgpu, renderer: forcedRenderer },
+      ],
+      autoplay,
+      debug: true,
+      logLevel: "warn",
+    });
+
+    runtime2dRef.current = rtT2D;
+    runtimeGlRef.current = rtTGL;
+    runtimeWgpuRef.current = rtWGPU;
+    setRt2d(rtT2D);
+    setRtGl(rtTGL);
+    setRtWgpu(rtWGPU);
 
     return () => {
-      const rt = runtimeRef.current;
-      runtimeRef.current = null;
-      setActiveRuntime(null);
-      if (rt) {
-        rt.destroy();
-      }
+      const r1 = runtime2dRef.current;
+      const r2 = runtimeGlRef.current;
+      const r3 = runtimeWgpuRef.current;
+      runtime2dRef.current = null;
+      runtimeGlRef.current = null;
+      runtimeWgpuRef.current = null;
+      setRt2d(null);
+      setRtGl(null);
+      setRtWgpu(null);
+      if (r1) r1.destroy();
+      if (r2) r2.destroy();
+      if (r3) r3.destroy();
       container2d.innerHTML = "";
       containerGl.innerHTML = "";
       containerWgpu.innerHTML = "";
@@ -148,6 +186,7 @@ const PrimitivClientWGPU: React.FC<PrimitivClientWGPUProps> = ({
           Left: Terminal2D
         </div>
         <div ref={container2dRef} style={{ flex: 1 }} />
+        <StatsOverlay runtime={rt2d} show={!isFullscreen && showStats} />
       </div>
       <div style={{ width: "8px", background: "#020617" }} />
       <div style={{ flex: 1, display: "flex", flexDirection: "column", position: "relative" }}>
@@ -163,6 +202,7 @@ const PrimitivClientWGPU: React.FC<PrimitivClientWGPUProps> = ({
           Middle: TerminalGL
         </div>
         <div ref={containerGlRef} style={{ flex: 1 }} />
+        <StatsOverlay runtime={rtGl} show={!isFullscreen && showStats} />
       </div>
       <div style={{ width: "8px", background: "#020617" }} />
       <div style={{ flex: 1, display: "flex", flexDirection: "column", position: "relative" }}>
@@ -178,8 +218,8 @@ const PrimitivClientWGPU: React.FC<PrimitivClientWGPUProps> = ({
           Right: TerminalWGPU
         </div>
         <div ref={containerWgpuRef} style={{ flex: 1 }} />
+        <StatsOverlay runtime={rtWgpu} show={!isFullscreen && showStats} />
       </div>
-      <StatsOverlay runtime={activeRuntime} show={!isFullscreen} />
     </div>
   );
 };

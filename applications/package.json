@@ -9,7 +9,7 @@
     "primitiv:refresh": "node scripts/primitiv-link.js refresh"
   },
   "dependencies": {
-    "@primitiv/engine": "0.23.0-nightly.20260324161252.f1fac21"
+    "@primitiv/engine": "0.23.0-nightly.20260324193606.b4facca"
   },
   "pnpm": {
     "overrides": {

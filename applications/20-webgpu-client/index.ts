@@ -72,23 +72,12 @@ export class WebGpuClientShowcase implements IApplication<
     _engine: Engine,
     user: User<WebGpuClientUserData>,
   ): void {
-    // 1. Terminal2D Display (ID: 0)
-    const display2D = new Display(0, DISPLAY_WIDTH, DISPLAY_HEIGHT);
-    display2D.switchPalette(0);
-    display2D.setOrigin(new Vector2(0, 0));
-    user.addDisplay(display2D);
-
-    // 2. TerminalGL Display (ID: 1)
-    const displayGL = new Display(1, DISPLAY_WIDTH, DISPLAY_HEIGHT);
-    displayGL.switchPalette(0);
-    displayGL.setOrigin(new Vector2(0, 0));
-    user.addDisplay(displayGL);
-
-    // 3. TerminalWGPU Display (ID: 2)
-    const displayWGPU = new Display(2, DISPLAY_WIDTH, DISPLAY_HEIGHT);
-    displayWGPU.switchPalette(0);
-    displayWGPU.setOrigin(new Vector2(0, 0));
-    user.addDisplay(displayWGPU);
+    // We only need one display (ID: 0) since this application is now
+    // instantiated 3 times in 3 independent ClientRuntimes by the host component.
+    const display = new Display(0, DISPLAY_WIDTH, DISPLAY_HEIGHT);
+    display.switchPalette(0);
+    display.setOrigin(new Vector2(0, 0));
+    user.addDisplay(display);
 
     // Shared layer for all displays
     const layer = new Layer(new Vector2(0, 0), 0, 256, 256, {
@@ -118,14 +107,15 @@ export class WebGpuClientShowcase implements IApplication<
       OrderBuilder.fill(" ", 0, 0),
       OrderBuilder.rect(0, 0, DISPLAY_WIDTH, DISPLAY_HEIGHT, " ", 0, 1, true),
       OrderBuilder.text(2, 1, "3 RENDERERS", 6, 0),
-      OrderBuilder.text(2, 3, "D0: Terminal2D", 5, 0),
-      OrderBuilder.text(2, 4, "D1: TerminalGL", 4, 0),
-      OrderBuilder.text(2, 5, "D2: TerminalWGPU", 4, 0),
+      OrderBuilder.text(2, 3, "L: Terminal2D", 5, 0),
+      OrderBuilder.text(2, 4, "M: TerminalGL", 4, 0),
+      OrderBuilder.text(2, 5, "R: TerminalWGPU", 4, 0),
       OrderBuilder.text(2, 6, `Tick: ${t}`, 3, 0),
       OrderBuilder.line(2, 8, maxX - 2, 8, "-", 2, 0),
-      OrderBuilder.text(2, 10, "Same scene for all 3", 5, 0),
-      OrderBuilder.text(2, 11, "(shared origin/data)", 5, 0),
-      OrderBuilder.line(2, 13, maxX - 2, 13, "-", 2, 0),
+      OrderBuilder.text(2, 10, "Same engine logic", 5, 0),
+      OrderBuilder.text(2, 11, "run 3 times", 5, 0),
+      OrderBuilder.text(2, 12, "in parallel", 5, 0),
+      OrderBuilder.line(2, 14, maxX - 2, 14, "-", 2, 0),
       OrderBuilder.text(
         2,
         bottomY - 1,
