@@ -1,12 +1,16 @@
-import { useMemo, useState, useCallback, memo } from "react";
+import { useMemo, useState, useCallback, memo, useRef } from "react";
 import { HashRouter, Routes, Route, Link, useParams } from "react-router-dom";
 import {
   PrimitivClient,
   PrimitivClientBridge,
   PrimitivClientMultiDisplay,
   PrimitivClientQuad,
+  PrimitivClientWGPU,
+  PrimitivClientWGPUSingle,
+  FullscreenButton,
 } from "./components/primitiv-client";
 import { RendererType } from "@primitiv/client";
+import { useFullscreen } from "./hooks/useFullscreen";
 import { APP_REGISTRY, findApp } from "./app-registry";
 import type { AppEntry } from "./app-registry";
 
@@ -782,12 +786,17 @@ function AppRunner() {
 
 function AppRunnerInner({ entry }: { entry: AppEntry }) {
   const application = useMemo(() => entry.factory(), [entry]);
+  const clientContainerRef = useRef<HTMLDivElement>(null);
   const [runtime, setRuntime] = useState<any>(null);
   const [bridgeMessages, setBridgeMessages] = useState<any[]>([]);
+
+  const { isFullscreen, toggleFullscreen } = useFullscreen(clientContainerRef);
 
   const isBridgeDemo = entry.slug === "12-bridge-communication";
   const isMultiDisplay = entry.slug === "13-multi-display";
   const isInterpolationDemo = entry.slug === "19-display-interpolation";
+  const isMultiWgpuDemo = entry.slug === "20-webgpu-client";
+  const isWgpuShowcase = entry.slug === "showcase-3d-05-neon-wireframe";
 
   // Applications requiring user interaction before running (for AudioContext or Navigator.vibrate to work)
   const requiresInteraction = [
@@ -856,18 +865,21 @@ function AppRunnerInner({ entry }: { entry: AppEntry }) {
         <span style={{ color: "#e2e8f0", fontWeight: 600, fontSize: "0.9rem" }}>
           {entry.name}
         </span>
-        <span style={{ color: "#64748b", fontSize: "0.8rem" }}>
+        <span style={{ color: "#64748b", fontSize: "0.8rem", flex: 1 }}>
           {entry.description}
         </span>
+        <FullscreenButton isFullscreen={isFullscreen} onToggle={toggleFullscreen} />
       </div>
 
       {/* Main Content Area */}
       <div style={{ flex: 1, display: "flex", overflow: "hidden" }}>
         {/* Client */}
         <div
+          ref={clientContainerRef}
           style={{
             flex: 1,
             display: "flex",
+            position: "relative",
           }}
         >
           {/* Render the appropriate client variant */}
@@ -881,6 +893,7 @@ function AppRunnerInner({ entry }: { entry: AppEntry }) {
               displayCount={2}
               gap={8}
               style={{ width: "100%", height: "100%" }}
+              isFullscreen={isFullscreen}
             />
           ) : isInterpolationDemo ? (
             <PrimitivClientQuad
@@ -889,6 +902,7 @@ function AppRunnerInner({ entry }: { entry: AppEntry }) {
               autoplay={shouldAutoplay}
               gap={8}
               style={{ width: "100%", height: "100%" }}
+              isFullscreen={isFullscreen}
             />
           ) : isBridgeDemo ? (
             <PrimitivClientBridge
@@ -900,6 +914,25 @@ function AppRunnerInner({ entry }: { entry: AppEntry }) {
               onRuntimeReady={setRuntime}
               onBridgeMessage={handleBridgeMessage}
               style={{ width: "100%", height: "100%" }}
+              isFullscreen={isFullscreen}
+            />
+          ) : isMultiWgpuDemo ? (
+            <PrimitivClientWGPU
+              application={application}
+              width={120}
+              height={67}
+              autoplay={shouldAutoplay}
+              style={{ width: "100%", height: "100%" }}
+              isFullscreen={isFullscreen}
+            />
+          ) : isWgpuShowcase ? (
+            <PrimitivClientWGPUSingle
+              application={application}
+              width={120}
+              height={67}
+              autoplay={shouldAutoplay}
+              style={{ width: "100%", height: "100%" }}
+              isFullscreen={isFullscreen}
             />
           ) : (
             <PrimitivClient
@@ -909,6 +942,7 @@ function AppRunnerInner({ entry }: { entry: AppEntry }) {
               height={67}
               autoplay={shouldAutoplay}
               style={{ width: "100%", height: "100%" }}
+              isFullscreen={isFullscreen}
             />
           )}
         </div>
@@ -924,7 +958,7 @@ function AppRunnerInner({ entry }: { entry: AppEntry }) {
         )}
 
         {/* Controls Overlay */}
-        {entry.controls && <ControlsOverlay controls={entry.controls} />}
+        {entry.controls && !isFullscreen && <ControlsOverlay controls={entry.controls} />}
       </div>
     </div>
   );

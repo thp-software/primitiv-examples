@@ -24,6 +24,8 @@ interface PrimitivClientQuadProps {
   autoplay?: boolean;
   /** Pixel gap between display containers (default: 8) */
   gap?: number;
+  /** Whether the client is in full screen mode */
+  isFullscreen?: boolean;
 }
 
 /**
@@ -36,6 +38,7 @@ const PrimitivClientQuad: React.FC<PrimitivClientQuadProps> = ({
   style,
   autoplay = true,
   gap = 8,
+  isFullscreen = false,
 }) => {
   const containerRefs = useRef<(HTMLDivElement | null)[]>([]);
   const runtimeRef = useRef<ClientRuntime | null>(null);
@@ -130,7 +133,7 @@ const PrimitivClientQuad: React.FC<PrimitivClientQuadProps> = ({
           }}
         />
       ))}
-      <StatsOverlay runtime={activeRuntime} />
+      <StatsOverlay runtime={activeRuntime} show={!isFullscreen} />
     </div>
   );
 };

@@ -2,7 +2,34 @@
   "name": "primitiv-applications",
   "private": true,
   "type": "module",
+  "scripts": {
+    "primitiv:link": "node scripts/primitiv-link.js link",
+    "primitiv:unlink": "node scripts/primitiv-link.js unlink",
+    "primitiv:status": "node scripts/primitiv-link.js status",
+    "primitiv:refresh": "node scripts/primitiv-link.js refresh"
+  },
   "dependencies": {
-    "@primitiv/engine": "^0.22.0"
+    "@primitiv/engine": "0.23.0-nightly.20260324161252.f1fac21"
+  },
+  "pnpm": {
+    "overrides": {
+      "@primitiv/audio": "file:C:/Users/Thomas/Documents/primitiv/primitiv/packages/audio",
+      "@primitiv/cli": "file:C:/Users/Thomas/Documents/primitiv/primitiv/packages/cli",
+      "@primitiv/client": "file:C:/Users/Thomas/Documents/primitiv/primitiv/packages/client",
+      "@primitiv/core": "file:C:/Users/Thomas/Documents/primitiv/primitiv/packages/core",
+      "@primitiv/engine": "file:C:/Users/Thomas/Documents/primitiv/primitiv/packages/engine",
+      "@primitiv/input": "file:C:/Users/Thomas/Documents/primitiv/primitiv/packages/input",
+      "@primitiv/logger": "file:C:/Users/Thomas/Documents/primitiv/primitiv/packages/logger",
+      "@primitiv/macro": "file:C:/Users/Thomas/Documents/primitiv/primitiv/packages/macro",
+      "@primitiv/network-client": "file:C:/Users/Thomas/Documents/primitiv/primitiv/packages/network-client",
+      "@primitiv/network-common": "file:C:/Users/Thomas/Documents/primitiv/primitiv/packages/network-common",
+      "@primitiv/network-server": "file:C:/Users/Thomas/Documents/primitiv/primitiv/packages/network-server",
+      "@primitiv/render": "file:C:/Users/Thomas/Documents/primitiv/primitiv/packages/render",
+      "@primitiv/runtime-client": "file:C:/Users/Thomas/Documents/primitiv/primitiv/packages/runtime-client",
+      "@primitiv/runtime-server": "file:C:/Users/Thomas/Documents/primitiv/primitiv/packages/runtime-server",
+      "@primitiv/server": "file:C:/Users/Thomas/Documents/primitiv/primitiv/packages/server",
+      "@primitiv/types": "file:C:/Users/Thomas/Documents/primitiv/primitiv/packages/types",
+      "@primitiv/visual-debugger": "file:C:/Users/Thomas/Documents/primitiv/primitiv/packages/visual-debugger"
+    }
   }
 }

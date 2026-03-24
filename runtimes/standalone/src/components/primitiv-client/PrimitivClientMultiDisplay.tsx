@@ -37,6 +37,8 @@ interface PrimitivClientMultiDisplayProps {
    * Creates a visual separation that makes each surface identifiable.
    */
   gap?: number;
+  /** Whether the client is in full screen mode */
+  isFullscreen?: boolean;
 }
 
 // =============================================================================
@@ -65,6 +67,7 @@ const PrimitivClientMultiDisplay: React.FC<PrimitivClientMultiDisplayProps> = ({
   autoplay = true,
   displayCount,
   gap = 8,
+  isFullscreen = false,
 }) => {
   // One ref slot per display surface
   const containerRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -161,7 +164,7 @@ const PrimitivClientMultiDisplay: React.FC<PrimitivClientMultiDisplayProps> = ({
           style={{ flex: 1, position: "relative" }}
         />
       ))}
-      <StatsOverlay runtime={activeRuntime} />
+      <StatsOverlay runtime={activeRuntime} show={!isFullscreen} />
     </div>
   );
 };

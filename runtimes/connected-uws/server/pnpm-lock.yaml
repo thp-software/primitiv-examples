@@ -4,16 +4,34 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+overrides:
+  '@primitiv/audio': file:C:/Users/Thomas/Documents/primitiv/primitiv/packages/audio
+  '@primitiv/client': file:C:/Users/Thomas/Documents/primitiv/primitiv/packages/client
+  '@primitiv/core': file:C:/Users/Thomas/Documents/primitiv/primitiv/packages/core
+  '@primitiv/engine': file:C:/Users/Thomas/Documents/primitiv/primitiv/packages/engine
+  '@primitiv/input': file:C:/Users/Thomas/Documents/primitiv/primitiv/packages/input
+  '@primitiv/logger': file:C:/Users/Thomas/Documents/primitiv/primitiv/packages/logger
+  '@primitiv/macro': file:C:/Users/Thomas/Documents/primitiv/primitiv/packages/macro
+  '@primitiv/network-client': file:C:/Users/Thomas/Documents/primitiv/primitiv/packages/network-client
+  '@primitiv/network-common': file:C:/Users/Thomas/Documents/primitiv/primitiv/packages/network-common
+  '@primitiv/network-server': file:C:/Users/Thomas/Documents/primitiv/primitiv/packages/network-server
+  '@primitiv/render': file:C:/Users/Thomas/Documents/primitiv/primitiv/packages/render
+  '@primitiv/runtime-client': file:C:/Users/Thomas/Documents/primitiv/primitiv/packages/runtime-client
+  '@primitiv/runtime-server': file:C:/Users/Thomas/Documents/primitiv/primitiv/packages/runtime-server
+  '@primitiv/server': file:C:/Users/Thomas/Documents/primitiv/primitiv/packages/server
+  '@primitiv/types': file:C:/Users/Thomas/Documents/primitiv/primitiv/packages/types
+  '@primitiv/visual-debugger': file:C:/Users/Thomas/Documents/primitiv/primitiv/packages/visual-debugger
+
 importers:
 
   .:
     dependencies:
       '@primitiv/engine':
-        specifier: 0.21.0
-        version: 0.21.0
+        specifier: file:C:/Users/Thomas/Documents/primitiv/primitiv/packages/engine
+        version: file:../../../../primitiv/packages/engine
       '@primitiv/server':
-        specifier: 0.21.0
-        version: 0.21.0
+        specifier: file:C:/Users/Thomas/Documents/primitiv/primitiv/packages/server
+        version: file:../../../../primitiv/packages/server
       cors:
         specifier: ^2.8.5
         version: 2.8.6
@@ -189,36 +207,36 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@primitiv/core@0.21.0':
-    resolution: {integrity: sha512-8MbFVR3CwMTRrERPWpBlxOHIczWHKSjqPDL0XDxc77N5f6xF7ar3MxcG+PtZAoG1FmgF8M8KZHbDaGyOTbTjiQ==}
+  '@primitiv/core@file:../../../../primitiv/packages/core':
+    resolution: {directory: ../../../../primitiv/packages/core, type: directory}
     engines: {node: '>=18.0.0'}
 
-  '@primitiv/engine@0.21.0':
-    resolution: {integrity: sha512-ScPxTPfq6cDiTFk91NkH0bpcMQ0NXkqQBFdIkHENGn2xuF1vbKbp3UiT5iL0v8NeGkgbWOoI+bNniAyR8hC88Q==}
+  '@primitiv/engine@file:../../../../primitiv/packages/engine':
+    resolution: {directory: ../../../../primitiv/packages/engine, type: directory}
     engines: {node: '>=18.0.0'}
 
-  '@primitiv/logger@0.21.0':
-    resolution: {integrity: sha512-IQxsAWUPYedBAPSBkpB4583EomLCgwKQJx3nKZEGD+mrjpvaKa2mnKeWUcn1q2er9slKnI+gE8JJ4OsvNy+SQQ==}
+  '@primitiv/logger@file:../../../../primitiv/packages/logger':
+    resolution: {directory: ../../../../primitiv/packages/logger, type: directory}
     engines: {node: '>=18.0.0'}
 
-  '@primitiv/network-common@0.21.0':
-    resolution: {integrity: sha512-dPrYGzav4j6dC6BEo2mDL7lO8/Sjx8YQLgzrvZW2HYr5+UlFZZ8kY1ubSHHfl/GCyct0ndoz0JcDJQBZzJGkLg==}
+  '@primitiv/network-common@file:../../../../primitiv/packages/network-common':
+    resolution: {directory: ../../../../primitiv/packages/network-common, type: directory}
     engines: {node: '>=18.0.0'}
 
-  '@primitiv/network-server@0.21.0':
-    resolution: {integrity: sha512-FyeWresk+H7YaiwDHSp/cUskF67zHRKx1x5hG+oswxaBb4KgFjPH+SrOXYxLZrXLH6uQSmQP+1ur7DdX2NnOKQ==}
+  '@primitiv/network-server@file:../../../../primitiv/packages/network-server':
+    resolution: {directory: ../../../../primitiv/packages/network-server, type: directory}
     engines: {node: '>=18.0.0'}
 
-  '@primitiv/runtime-server@0.21.0':
-    resolution: {integrity: sha512-0gr1CgKVs2nKu7z9gYRZnXHSzWE3a6BmGYdftYG8adpHg8GABhMymLT0/gWBxchwK4TPllYVTPSVX0Y0lJimcg==}
+  '@primitiv/runtime-server@file:../../../../primitiv/packages/runtime-server':
+    resolution: {directory: ../../../../primitiv/packages/runtime-server, type: directory}
     engines: {node: '>=18.0.0'}
 
-  '@primitiv/server@0.21.0':
-    resolution: {integrity: sha512-FRHJbK/+pVVAhWILWtoSQCKdJTnD7WWdbGwK+KZoai30ZL0nRL7W8JvUmKo88WqBRcpn1/yOwzncUwu4nDc3hw==}
+  '@primitiv/server@file:../../../../primitiv/packages/server':
+    resolution: {directory: ../../../../primitiv/packages/server, type: directory}
     engines: {node: '>=18.0.0'}
 
-  '@primitiv/types@0.21.0':
-    resolution: {integrity: sha512-SfQPgZuj27uNlXDIRrVgU2pCj0ALo9+HhcsaN5Ra6Toi/sUXtTvel3HnQ6uw7rFJ4SLI74aq5qWnd+iZ/Gj4kQ==}
+  '@primitiv/types@file:../../../../primitiv/packages/types':
+    resolution: {directory: ../../../../primitiv/packages/types, type: directory}
     engines: {node: '>=18.0.0'}
 
   '@types/cors@2.8.19':
@@ -481,44 +499,44 @@ snapshots:
   '@esbuild/win32-x64@0.27.3':
     optional: true
 
-  '@primitiv/core@0.21.0':
+  '@primitiv/core@file:../../../../primitiv/packages/core':
     dependencies:
-      '@primitiv/logger': 0.21.0
-      '@primitiv/types': 0.21.0
+      '@primitiv/logger': file:../../../../primitiv/packages/logger
+      '@primitiv/types': file:../../../../primitiv/packages/types
 
-  '@primitiv/engine@0.21.0':
+  '@primitiv/engine@file:../../../../primitiv/packages/engine':
     dependencies:
-      '@primitiv/core': 0.21.0
-      '@primitiv/types': 0.21.0
+      '@primitiv/core': file:../../../../primitiv/packages/core
+      '@primitiv/types': file:../../../../primitiv/packages/types
 
-  '@primitiv/logger@0.21.0': {}
+  '@primitiv/logger@file:../../../../primitiv/packages/logger': {}
 
-  '@primitiv/network-common@0.21.0':
+  '@primitiv/network-common@file:../../../../primitiv/packages/network-common':
     dependencies:
-      '@primitiv/types': 0.21.0
+      '@primitiv/types': file:../../../../primitiv/packages/types
 
-  '@primitiv/network-server@0.21.0':
+  '@primitiv/network-server@file:../../../../primitiv/packages/network-server':
     dependencies:
-      '@primitiv/network-common': 0.21.0
-      '@primitiv/types': 0.21.0
+      '@primitiv/network-common': file:../../../../primitiv/packages/network-common
+      '@primitiv/types': file:../../../../primitiv/packages/types
       node-datachannel: 0.12.0
       uWebSockets.js: https://codeload.github.com/uNetworking/uWebSockets.js/tar.gz/fcfc622a4286909593b7f390056d89e0ca3b56b9
 
-  '@primitiv/runtime-server@0.21.0':
+  '@primitiv/runtime-server@file:../../../../primitiv/packages/runtime-server':
     dependencies:
-      '@primitiv/core': 0.21.0
-      '@primitiv/logger': 0.21.0
-      '@primitiv/network-common': 0.21.0
-      '@primitiv/network-server': 0.21.0
-      '@primitiv/types': 0.21.0
+      '@primitiv/core': file:../../../../primitiv/packages/core
+      '@primitiv/logger': file:../../../../primitiv/packages/logger
+      '@primitiv/network-common': file:../../../../primitiv/packages/network-common
+      '@primitiv/network-server': file:../../../../primitiv/packages/network-server
+      '@primitiv/types': file:../../../../primitiv/packages/types
 
-  '@primitiv/server@0.21.0':
+  '@primitiv/server@file:../../../../primitiv/packages/server':
     dependencies:
-      '@primitiv/network-common': 0.21.0
-      '@primitiv/network-server': 0.21.0
-      '@primitiv/runtime-server': 0.21.0
+      '@primitiv/network-common': file:../../../../primitiv/packages/network-common
+      '@primitiv/network-server': file:../../../../primitiv/packages/network-server
+      '@primitiv/runtime-server': file:../../../../primitiv/packages/runtime-server
 
-  '@primitiv/types@0.21.0': {}
+  '@primitiv/types@file:../../../../primitiv/packages/types': {}
 
   '@types/cors@2.8.19':
     dependencies:

@@ -7,15 +7,9 @@ import {
 import "./PrimitivClient.css";
 import { StatsOverlay } from "./StatsOverlay";
 
-// =============================================================================
-// Types
-// =============================================================================
-
-interface PrimitivClientProps {
+interface PrimitivClientWGPUSingleProps {
   /** The Primitiv Application instance to run */
   application: IApplication;
-  /** Renderer type (default: TerminalGL) */
-  renderer?: RendererType;
   /** Grid width in cells (default: 80) */
   width?: number;
   /** Grid height in cells (default: 24) */
@@ -30,24 +24,8 @@ interface PrimitivClientProps {
   isFullscreen?: boolean;
 }
 
-// =============================================================================
-// Component
-// =============================================================================
-
-/**
- * PrimitivClient - simplest React wrapper for the Primitiv ClientRuntime.
- *
- * Single display, no bridge callbacks, no multi-display.
- * Use PrimitivClientBridge or PrimitivClientMultiDisplay for those features.
- *
- * Handles:
- * - Initialization and cleanup of the ClientRuntime
- * - Protection against React Strict Mode double-invocation
- * - Hot Module Replacement (HMR) support for development
- */
-const PrimitivClient: React.FC<PrimitivClientProps> = ({
+const PrimitivClientWGPUSingle: React.FC<PrimitivClientWGPUSingleProps> = ({
   application,
-  renderer = RendererType.TerminalGL,
   width = 80,
   height = 24,
   className = "",
@@ -59,21 +37,19 @@ const PrimitivClient: React.FC<PrimitivClientProps> = ({
   const runtimeRef = useRef<ClientRuntime | null>(null);
   const initializedWithKeyRef = useRef<string | null>(null);
 
-  // State to pass to the overlay
-  const [activeRuntime, setActiveRuntime] = useState<ClientRuntime | null>(
-    null,
-  );
+  const [activeRuntime, setActiveRuntime] = useState<ClientRuntime | null>(null);
 
-  const depsKey = `${application.constructor.name}-${renderer}-${width}-${height}-${autoplay}`;
+  const supportsWebGpu = typeof navigator !== "undefined" && "gpu" in navigator;
+  const renderer = RendererType.TerminalWGPU;
+
+  const depsKey = `${application.constructor.name}-${renderer}-clean-${width}-${height}-${autoplay}`;
 
   useEffect(() => {
     const container = containerRef.current;
-    if (!container) return;
+    if (!container || !supportsWebGpu) return;
 
-    // Strict Mode protection
     if (initializedWithKeyRef.current === depsKey) return;
 
-    // HMR cleanup
     if (runtimeRef.current) {
       runtimeRef.current.destroy();
       runtimeRef.current = null;
@@ -81,11 +57,13 @@ const PrimitivClient: React.FC<PrimitivClientProps> = ({
     container.innerHTML = "";
     initializedWithKeyRef.current = depsKey;
 
-    // Initialize
     const runtime = new ClientRuntime({
       mode: "standalone",
       standalone: { application },
-      displays: [{ displayId: 0, container, renderer }],
+      displays: [
+        // Back to normal: only one display on ID 0
+        { displayId: 0, container, renderer },
+      ],
       autoplay,
       debug: true,
       logLevel: "warn",
@@ -101,23 +79,48 @@ const PrimitivClient: React.FC<PrimitivClientProps> = ({
       if (rt) {
         rt.destroy();
       }
-      // Clear the container to release any DOM/WebGL resources
       if (container) {
         container.innerHTML = "";
       }
       initializedWithKeyRef.current = null;
     };
-  }, [application, renderer, width, height, autoplay, depsKey]);
+  }, [application, renderer, width, height, autoplay, depsKey, supportsWebGpu]);
+
+  if (!supportsWebGpu) {
+    return (
+      <div
+        className={`primitiv-client ${className}`}
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          background: "#020617",
+          color: "#e2e8f0",
+          padding: "1rem",
+          textAlign: "center",
+          ...style,
+        }}
+      >
+        <div>
+          <div style={{ fontSize: "1rem", fontWeight: 700, marginBottom: "0.5rem" }}>
+            WebGPU not supported on this device/browser.
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div
       className={`primitiv-client ${className}`}
       style={{ display: "flex", ...style }}
     >
-      <div ref={containerRef} style={{ flex: 1, position: "relative" }} />
+      <div style={{ flex: 1, display: "flex", flexDirection: "column", position: "relative" }}>
+        <div ref={containerRef} style={{ flex: 1 }} />
+      </div>
       <StatsOverlay runtime={activeRuntime} show={!isFullscreen} />
     </div>
   );
 };
 
-export default PrimitivClient;
+export default PrimitivClientWGPUSingle;

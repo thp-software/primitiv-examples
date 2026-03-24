@@ -18,6 +18,8 @@ interface StatsSnapshot {
 
 interface StatsOverlayProps {
   runtime: ClientRuntime | null;
+  /** Whether to show the overlay (default: true) */
+  show?: boolean;
 }
 
 // =============================================================================
@@ -68,7 +70,7 @@ function formatBps(bps: number): string {
 
 const RAF_SAMPLE_COUNT = 60;
 
-const StatsOverlayInner: React.FC<StatsOverlayProps> = ({ runtime }) => {
+const StatsOverlayInner: React.FC<StatsOverlayProps> = ({ runtime, show = true }) => {
   const [snap, setSnap] = useState<StatsSnapshot>({
     cappedFps: 0,
     avgUpdateMs: 0,
@@ -226,6 +228,8 @@ const StatsOverlayInner: React.FC<StatsOverlayProps> = ({ runtime }) => {
       label: { opacity: 0.5 } as const,
     };
   }, [bpsColorCategory]);
+
+  if (!show) return null;
 
   return (
     <div style={styles.container}>

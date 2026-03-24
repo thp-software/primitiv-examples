@@ -6,3 +6,35 @@
   overflow: hidden;
   position: relative;
 }
+
+.primitiv-fullscreen-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  z-index: 10000;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(4px);
+  padding: 0;
+}
+
+.primitiv-fullscreen-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: scale(1.05);
+}
+
+.primitiv-fullscreen-btn svg {
+  width: 18px;
+  height: 18px;
+}
